@@ -1,0 +1,82 @@
+{
+  "name": "Crosslinks",
+  "lowCaseName": "crosslinks",
+  "description": "Manage automatic crosslinks",
+  "author": "Thomas Jakobi",
+  "version": "1.0.0",
+  "package": {
+    "menus": [
+      {
+        "text": "crosslinks.menu",
+        "description": "crosslinks.menu_desc",
+        "action": "home",
+        "parent": "components"
+      }
+    ],
+    "elements": {
+      "chunks": [
+        {
+          "name": "Crosslinks.linkTpl",
+          "file": "linkTpl.html"
+        }
+      ],
+      "plugins": [
+        {
+          "name": "Crosslinks",
+          "file": "crosslinks.plugin.php",
+          "description": "Replace crosslinks in the resource",
+          "events": [
+            "OnLoadWebDocument"
+          ]
+        }
+      ]
+    },
+    "systemSettings": [
+      {
+        "key": "debug",
+        "type": "combo-boolean",
+        "area": "system",
+        "value": "0"
+      },
+      {
+        "key": "tpl",
+        "area": "site",
+        "value": "Crosslinks.linkTpl"
+      },
+      {
+        "key": "fullwords",
+        "type": "combo-boolean",
+        "area": "site",
+        "value": "1"
+      },
+      {
+        "key": "sections",
+        "type": "combo-boolean",
+        "area": "site",
+        "value": "0"
+      }
+    ]
+  },
+  "database": {
+    "tables": [
+      "CrosslinksLink"
+    ]
+  },
+  "build": {
+    "readme": "docs/readme.md",
+    "license": "docs/license.md",
+    "changelog": "docs/changelog.md",
+    "options": {
+      "modx_version": "2.6"
+    },
+    "setupOptions": {
+      "source": "setup.options.php"
+    },
+    "resolver": {
+      "after": [
+        "resolve.synctables.php",
+        "resolve.treehillstudio.php"
+      ]
+    }
+  }
+}

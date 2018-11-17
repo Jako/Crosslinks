@@ -15,11 +15,7 @@ $output = '<style type="text/css">
 $values = array();
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
-        $output .= '<script>
-            document.getElementsByClassName("x-window-header-text")[0].innerHTML = "Install Crosslinks - a MODX extra by Treehill Studio";
-        </script>
-
-        <h2>Install Crosslinks</h2>
+        $output .= '<h2>Install Crosslinks</h2>
 
         <p>Thanks for installing Crosslinks. This open source extra was
         developped by Treehill Studio - MODX development in Münsterland.</p>
@@ -35,11 +31,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
 
         break;
     case xPDOTransport::ACTION_UPGRADE:
-        $output .= '<script>
-            document.getElementsByClassName("x-window-header-text")[0].innerHTML = "Upgrade Crosslinks - a MODX extra by Treehill Studio";
-        </script>
-        
-        <h2>Upgrade Crosslinks</h2>
+        $output .= '<h2>Upgrade Crosslinks</h2>
 
         <p>Crosslinks will be upgraded. This open source extra was developped by
         Treehill Studio - MODX development in Münsterland.</p>

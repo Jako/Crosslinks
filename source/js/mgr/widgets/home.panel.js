@@ -7,7 +7,7 @@ Crosslinks.panel.Home = function (config) {
             autoHeight: true
         },
         items: [{
-            html: '<h2>' + _('crosslinks') + '</h2>' + ((Crosslinks.config.debug) ? '<div class="ribbon top-right"><span>' + _('crosslinks.debug_mode') + '</span></div>' : ''),
+            html: '<h2>' + _('crosslinks.management') + '</h2>' + ((Crosslinks.config.debug) ? '<div class="ribbon top-right"><span>' + _('crosslinks.debug_mode') + '</span></div>' : ''),
             border: false,
             cls: 'modx-page-header'
         }, {
@@ -78,6 +78,12 @@ Crosslinks.panel.Overview = function (config) {
         xtype: 'crosslinks-panel-hometab',
         tabtype: 'links'
     }];
+    if (Crosslinks.config.is_admin) {
+        this.panelOverviewTabs.push({
+            xtype: 'crosslinks-panel-settings',
+            tabtype: 'settings'
+        })
+    }
     Ext.applyIf(config, {
         id: this.ident,
         items: [{
@@ -100,7 +106,9 @@ Crosslinks.panel.Overview = function (config) {
             items: this.panelOverviewTabs,
             listeners: {
                 tabchange: function (o, t) {
-                    if (t.xtype === 'crosslinks-panel-hometab') {
+                    if (t.tabtype === 'settings') {
+                        Ext.getCmp('crosslinks-grid-system-settings').getStore().reload();
+                    } else if (t.xtype === 'crosslinks-panel-hometab') {
                         if (Ext.getCmp('crosslinks-panel-' + t.tabtype + '-grid')) {
                             Ext.getCmp('crosslinks-panel-' + t.tabtype + '-grid').getStore().reload();
                         }

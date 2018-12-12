@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @package crosslinks
  * @subpackage plugin
  */
+
 class CrosslinksOnLoadWebDocument extends CrosslinksPlugin
 {
     public function run()

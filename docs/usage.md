@@ -1,9 +1,9 @@
 ## Introduction
 
-This MODX Extra adds a custom manager page that allows you to create & maintain
-a list of crosslinks in your site. Entries into the crosslinks take the form of
-`text => resource` where `text` is the linktext and `resource` is the linked
-resource.
+This MODX Extra adds a custom manager page that allows you to create and
+maintain a list of crosslinks in your site. Entries into the crosslinks take the
+form of `text => resource` where `text` is the linktext and `resource` is the
+linked resource.
 
 ## Plugin
 
@@ -17,9 +17,12 @@ The Plugin could be controlled by the following MODX System settings:
 Setting | Description | Default
 ------------|---------|--------
 debug | Log debug informations in the MODX error log. | No
+disabledAttributes | (Comma separated list) Crosslinks does not replace text inside of this HTML tag attributes. | No
 fullwords | Replace only full words of a crosslinks term in the resource content. | Yes
+sections | Replace Crosslinks links only in sections marked with `<!— CrosslinksStart -->` and `<!— CrosslinksEnd -->`. The section markers could be changed with the settings `crosslinks.sectionsStart` and `crosslinks.sectionsEnd`. | No
+sectionsEnd | Marker at the end of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`. | No
+sectionsStart | Marker at the start of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`. | No
 tpl | Template Chunk for the highlight replacement. | Crosslinks.linkTpl
-sections | Replace crosslinks terms only in sections surrounded by `<!— CrosslinksStart -->` and `<!— CrosslinksEnd -->`. | No
 
 ## Available placeholders
 

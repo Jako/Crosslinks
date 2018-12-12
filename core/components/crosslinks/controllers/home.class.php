@@ -31,20 +31,23 @@ class CrosslinksHomeManagerController extends modExtraManagerController
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
         if ($this->crosslinks->getOption('debug') && ($this->crosslinks->getOption('assetsUrl') != MODX_ASSETS_URL . 'components/crosslinks/')) {
-            $this->addCss($cssSourceUrl . 'crosslinks.css');
-            $this->addJavascript($jsSourceUrl . 'crosslinks.js');
-            $this->addJavascript($jsSourceUrl . 'helper/combo.js');
-            $this->addJavascript($jsSourceUrl . 'helper/jsongrid.js');
-            $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js');
-            $this->addJavascript($jsSourceUrl . 'widgets/links.grid.js');
-            $this->addLastJavascript($jsSourceUrl . 'sections/home.js');
+            $this->addCss($cssSourceUrl . 'crosslinks.css?v=v' . $this->crosslinks->version);
+            $this->addJavascript($jsSourceUrl . 'crosslinks.js?v=v' . $this->crosslinks->version);
+            $this->addJavascript($jsSourceUrl . 'helper/combo.js?v=v' . $this->crosslinks->version);
+            $this->addJavascript($jsSourceUrl . 'helper/jsongrid.js?v=v' . $this->crosslinks->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js?v=v' . $this->crosslinks->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/links.grid.js?v=v' . $this->crosslinks->version);
+            $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js');
+            $this->addJavascript($jsSourceUrl . 'widgets/settings.panel.js?v=v' . $this->crosslinks->version);
+            $this->addLastJavascript($jsSourceUrl . 'sections/home.js?v=v' . $this->crosslinks->version);
         } else {
             $this->addCss($cssUrl . 'crosslinks.min.css?v=v' . $this->crosslinks->version);
-            $this->addLastJavascript($jsUrl . 'crosslinks.min.js');
+            $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js');
+            $this->addLastJavascript($jsUrl . 'crosslinks.min.js?v=v' . $this->crosslinks->version);
         }
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
-            Crosslinks.config = ' . $this->modx->toJSON($this->crosslinks->config) . ';
+            Crosslinks.config = ' . json_encode($this->crosslinks->options, JSON_PRETTY_PRINT) . ';
             MODx.load({xtype: "crosslinks-page-home"});
         });
         </script>');
@@ -52,7 +55,7 @@ class CrosslinksHomeManagerController extends modExtraManagerController
 
     public function getLanguageTopics()
     {
-        return array('crosslinks:default');
+        return array('core:setting','crosslinks:default');
     }
 
     public function process(array $scriptProperties = array())

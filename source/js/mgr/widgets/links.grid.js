@@ -85,7 +85,7 @@ Crosslinks.grid.Links = function (config) {
             }
         }, {
             xtype: 'button',
-            id: this.ident + '-image-filter-clear',
+            id: this.ident + '-crosslinks-filter-clear',
             cls: 'x-form-filter-clear',
             text: _('filter_clear'),
             listeners: {
@@ -105,6 +105,11 @@ Ext.extend(Crosslinks.grid.Links, MODx.grid.Grid, {
         m.push({
             text: _('crosslinks.link_update'),
             handler: this.updateLink
+        });
+        m.push('-');
+        m.push({
+            text: _('crosslinks.link_duplicate'),
+            handler: this.duplicateLink
         });
         m.push('-');
         m.push({
@@ -145,6 +150,28 @@ Ext.extend(Crosslinks.grid.Links, MODx.grid.Grid, {
         });
         createUpdateLink.fp.getForm().setValues(r);
         createUpdateLink.show(e.target);
+    },
+    duplicateLink: function (btn, e) {
+        if (!this.menu.record) {
+            return false;
+        }
+        var r = Ext.apply({}, this.menu.record);
+        r.text = _('crosslinks.duplicate') + ' ' + r.text;
+        r.id = null;
+        var duplicateLink = MODx.load({
+            xtype: 'crosslinks-window-link-create-update',
+            isUpdate: false,
+            title: _('crosslinks.link_duplicate'),
+            record: r,
+            listeners: {
+                success: {
+                    fn: this.refresh,
+                    scope: this
+                }
+            }
+        });
+        duplicateLink.fp.getForm().setValues(r);
+        duplicateLink.show(e.target);
     },
     removeLink: function () {
         if (!this.menu.record) {
@@ -188,6 +215,11 @@ Ext.extend(Crosslinks.grid.Links, MODx.grid.Grid, {
                     text: _('crosslinks.link_update')
                 },
                 {
+                    className: 'duplicate',
+                    icon: 'clone',
+                    text: _('crosslinks.link_duplicate')
+                },
+                {
                     className: 'remove',
                     icon: 'trash-o',
                     text: _('crosslinks.link_remove')
@@ -206,6 +238,9 @@ Ext.extend(Crosslinks.grid.Links, MODx.grid.Grid, {
             switch (act) {
                 case 'remove':
                     this.removeLink(record, e);
+                    break;
+                case 'duplicate':
+                    this.duplicateLink(record, e);
                     break;
                 case 'update':
                     this.updateLink(record, e);

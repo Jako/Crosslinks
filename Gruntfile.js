@@ -39,6 +39,7 @@ module.exports = function (grunt) {
                     'source/js/mgr/helper/jsongrid.js',
                     'source/js/mgr/widgets/home.panel.js',
                     'source/js/mgr/widgets/links.grid.js',
+                    'source/js/mgr/widgets/settings.panel.js',
                     'source/js/mgr/sections/home.js'
                 ],
                 dest: 'assets/components/crosslinks/js/mgr/crosslinks.min.js'

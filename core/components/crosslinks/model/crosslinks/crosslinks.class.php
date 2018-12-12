@@ -29,38 +29,33 @@ class Crosslinks
      * The version
      * @var string $version
      */
-    public $version = '1.0.0';
+    public $version = '1.1.0';
 
     /**
-     * The class config
-     * @var array $config
+     * The class options
+     * @var array $options
      */
-    public $config = array();
+    public $options = array();
 
     /**
      * Crosslinks constructor
      *
      * @param modX $modx A reference to the modX instance.
-     * @param array $config An config array. Optional.
+     * @param array $options An array of options. Optional.
      */
-    function __construct(modX &$modx, $config = array())
+    function __construct(modX &$modx, $options = array())
     {
         $this->modx =& $modx;
+        $this->namespace = $this->getOption('namespace', $options, $this->namespace);
 
-        $corePath = $this->getOption('core_path', $config, $this->modx->getOption('core_path') . 'components/' . $this->namespace . '/');
-        $assetsPath = $this->getOption('assets_path', $config, $this->modx->getOption('assets_path') . 'components/' . $this->namespace . '/');
-        $assetsUrl = $this->getOption('assets_url', $config, $this->modx->getOption('assets_url') . 'components/' . $this->namespace . '/');
+        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/' . $this->namespace . '/');
+        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/' . $this->namespace . '/');
+        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/' . $this->namespace . '/');
 
         // Load some default paths for easier management
-        $this->config = array_merge(array(
+        $this->options = array_merge(array(
             'namespace' => $this->namespace,
             'version' => $this->version,
-            'assetsPath' => $assetsPath,
-            'assetsUrl' => $assetsUrl,
-            'cssUrl' => $assetsUrl . 'css/',
-            'jsUrl' => $assetsUrl . 'js/',
-            'imagesUrl' => $assetsUrl . 'images/',
-            'connectorUrl' => $assetsUrl . 'connector.php',
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
             'vendorPath' => $corePath . 'vendor/',
@@ -71,18 +66,23 @@ class Crosslinks
             'controllersPath' => $corePath . 'controllers/',
             'processorsPath' => $corePath . 'processors/',
             'templatesPath' => $corePath . 'templates/',
-        ), $config);
+            'assetsPath' => $assetsPath,
+            'assetsUrl' => $assetsUrl,
+            'jsUrl' => $assetsUrl . 'js/',
+            'cssUrl' => $assetsUrl . 'css/',
+            'imagesUrl' => $assetsUrl . 'images/',
+            'connectorUrl' => $assetsUrl . 'connector.php'
+        ), $options);
 
-        // set default options
-        $this->config = array_merge($this->config, array(
-            'crosslinksStart' => $this->getOption('crosslinksStart', $config, '<!-- CrosslinksStart -->'),
-            'crosslinksEnd' => $this->getOption('crosslinksEnd', $config, '<!-- CrosslinksEnd -->')
+        // Add default options
+        $this->options = array_merge($this->options, array(
+            'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('Agenda Administrator') : false,
+            'debug' => (bool)$this->getOption('debug', $options, false)
         ));
 
-        $modx->getService('lexicon', 'modLexicon');
-        $this->modx->lexicon->load($this->namespace . ':default');
-
-        $this->modx->addPackage('crosslinks', $this->config['modelPath']);
+        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
+        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
+        $lexicon->load($this->namespace . ':default');
     }
 
     /**
@@ -100,8 +100,8 @@ class Crosslinks
         if (!empty($key) && is_string($key)) {
             if ($options != null && array_key_exists($key, $options)) {
                 $option = $options[$key];
-            } elseif (array_key_exists($key, $this->config)) {
-                $option = $this->config[$key];
+            } elseif (array_key_exists($key, $this->options)) {
+                $option = $this->options[$key];
             } elseif (array_key_exists("{$this->namespace}.{$key}", $this->modx->config)) {
                 $option = $this->modx->getOption("{$this->namespace}.{$key}");
             }
@@ -126,7 +126,7 @@ class Crosslinks
     }
 
     /**
-     * Highlight links in the text
+     * Create links in the text
      *
      * @param string $text
      * @param string $chunkName
@@ -137,7 +137,7 @@ class Crosslinks
         // Enable section markers
         $enableSections = $this->getOption('sections', null, false);
         if ($enableSections) {
-            $splitEx = '#((?:' . $this->getOption('crosslinksStart') . ').*?(?:' . $this->getOption('crosslinksEnd') . '))#isu';
+            $splitEx = '#((?:' . $this->getOption('sectionsStart') . ').*?(?:' . $this->getOption('sectionsEnd') . '))#isu';
             $sections = preg_split($splitEx, $text, null, PREG_SPLIT_DELIM_CAPTURE);
         } else {
             $sections = array($text);
@@ -148,21 +148,35 @@ class Crosslinks
         $maskStart = '<_^_>';
         $maskEnd = '<_$_>';
         $fullwords = $this->getOption('fullwords', null, true);
+        $disabledAttributes = array_map('trim', explode(',', $this->getOption('disabledAttributes', null, 'title,alt')));
+        $splitEx = '#((?:' . implode('|', $disabledAttributes) . ')\s*=\s*".*?")#isu';
         foreach ($links as $link) {
             if ($fullwords) {
                 foreach ($sections as &$section) {
-                    if (($enableSections && substr($section, 0, strlen($this->getOption('crosslinksStart'))) == $this->getOption('crosslinksStart') && preg_match('/\b' . preg_quote($link['text']) . '\b/u', $section)) ||
+                    if (($enableSections && strpos($section, $this->getOption('sectionsStart')) === 0 && preg_match('/\b' . preg_quote($link['text']) . '\b/u', $section)) ||
                         (!$enableSections && preg_match('/\b' . preg_quote($link['text']) . '\b/u', $section))
                     ) {
-                        $section = preg_replace('/\b' . preg_quote($link['text']) . '\b/u', $maskStart . $link['text'] . $maskEnd, $section);
+                        $subSections = preg_split($splitEx, $section, null, PREG_SPLIT_DELIM_CAPTURE);
+                        foreach ($subSections as &$subSection) {
+                            if (!preg_match($splitEx, $subSection)) {
+                                $subSection = preg_replace('/\b' . preg_quote($link['text']) . '\b/u', $maskStart . $link['text'] . $maskEnd, $subSection);
+                            }
+                        }
+                        $section = implode('', $subSections);
                     }
                 }
             } else {
                 foreach ($sections as &$section) {
-                    if (($enableSections && substr($section, 0, strlen($this->getOption('crosslinksStart'))) == $this->getOption('crosslinksStart') && strpos($text, $link['text']) !== false) ||
-                        (!$enableSections && strpos($text, $link['text']) !== false)
+                    if (($enableSections && strpos($section, $this->getOption('sectionsStart')) === 0 && strpos($section, $link['text']) !== false) ||
+                        (!$enableSections && strpos($section, $link['text']) !== false)
                     ) {
-                        $section = str_replace($link['text'], $maskStart . $link['text'] . $maskEnd, $section);
+                        $subSections = preg_split($splitEx, $section, null, PREG_SPLIT_DELIM_CAPTURE);
+                        foreach ($subSections as &$subSection) {
+                            if (!preg_match($splitEx, $subSection)) {
+                                $subSection = str_replace($link['text'], $maskStart . $link['text'] . $maskEnd, $subSection);
+                            }
+                        }
+                        $section = implode('', $subSections);
                     }
                 }
             }
@@ -182,7 +196,7 @@ class Crosslinks
 
         // Remove remaining section markers
         $text = ($enableSections) ? str_replace(array(
-            $this->getOption('crosslinksStart'), $this->getOption('crosslinksEnd')
+            $this->getOption('sectionsStart'), $this->getOption('sectionsEnd')
         ), '', $text) : $text;
         return $text;
     }

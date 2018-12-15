@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2018-12-02
 ### Added
 - Don't replace crosslinks in definable html attributes
-- Edit crosslinks system settings in the custom manager page
+- Edit Crosslinks system settings in the custom manager page
 
 ## [1.0.0] - 2018-11-14
 ### Added

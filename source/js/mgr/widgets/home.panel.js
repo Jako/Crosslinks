@@ -96,6 +96,7 @@ Crosslinks.panel.Overview = function (config) {
                     activeTab: this.items.indexOf(this.getActiveTab())
                 };
             },
+            autoScroll: true,
             deferredRender: false,
             forceLayout: true,
             defaults: {

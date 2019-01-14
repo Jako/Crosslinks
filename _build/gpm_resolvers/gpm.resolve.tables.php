@@ -22,11 +22,9 @@ if ($object->xpdo) {
             $modx->addPackage('crosslinks', $modelPath, null);
 
 
-
             $manager = $modx->getManager();
 
             $manager->createObjectContainer('CrosslinksLink');
-
 
             break;
     }

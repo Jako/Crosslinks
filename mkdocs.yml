@@ -6,7 +6,7 @@ edit_uri: tree/master/docs
 repo_name: 'Jako/Crosslinks'
 repo_url: https://github.com/Jako/Crosslinks
 
-copyright: '&copy; 2018 <a href="https://treehillstudio.com">Treehill Studio</a>'
+copyright: '&copy; 2018-2019 <a href="https://treehillstudio.com">Treehill Studio</a>'
 
 pages:
 - Description: 'index.md'

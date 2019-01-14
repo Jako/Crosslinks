@@ -11,7 +11,8 @@ class CrosslinksOnLoadWebDocument extends CrosslinksPlugin
         $chunkName = $this->crosslinks->getOption('tpl');
 
         $content = $this->modx->resource->get('content');
-        $newContent = $this->crosslinks->addCrosslinks($content, $chunkName);
+        $links = $this->crosslinks->getLinks($chunkName);
+        $newContent = $this->crosslinks->addCrosslinks($content, $links);
         $this->modx->resource->set('content', $newContent);
     }
 }

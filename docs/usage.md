@@ -2,8 +2,8 @@
 
 This MODX Extra adds a custom manager page that allows you to create and
 maintain a list of crosslinks in your site. Entries into the crosslinks take the
-form of `text => resource` where `text` is the linktext and `resource` is the
-linked resource.
+form of `text => resource` where `text` is the searched linktext and `resource`
+is the linked resource.
 
 ## Plugin
 
@@ -17,7 +17,7 @@ The Plugin could be controlled by the following MODX System settings:
 Setting | Description | Default
 ------------|---------|--------
 debug | Log debug informations in the MODX error log. | No
-disabledAttributes | (Comma separated list) Crosslinks does not replace text inside of this HTML tag attributes. | No
+disabledTags | (Comma separated list) Crosslinks does not replace text inside of this HTML tags. | No
 fullwords | Replace only full words of a crosslinks term in the resource content. | Yes
 sections | Replace Crosslinks links only in sections marked with `<!— CrosslinksStart -->` and `<!— CrosslinksEnd -->`. The section markers could be changed with the settings `crosslinks.sectionsStart` and `crosslinks.sectionsEnd`. | No
 sectionsEnd | Marker at the end of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`. | No
@@ -36,5 +36,6 @@ resource | The id of the linked resource | linkTpl
 parameter | json encoded array of link parameters | linkTpl
 
 The default chunk for these placeholders is available with the `Crosslinks.`
-prefix. If you want to change the chunk, you have to duplicate it and change the
-duplicate. The default chunk is reset with each update of the Crosslinks extra.
+prefix. If you want to change the chunk, you have to duplicate it, change the
+duplicate and reference the duplicate in the MODX system settings. The default
+chunk is reset with each update of the Crosslinks extra.

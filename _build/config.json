@@ -3,7 +3,7 @@
   "lowCaseName": "crosslinks",
   "description": "Manage automatic crosslinks",
   "author": "Thomas Jakobi",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "package": {
     "menus": [
       {
@@ -60,9 +60,9 @@
         "value": "<!-- CrosslinksEnd -->"
       },
       {
-        "key": "disabledAttributes",
+        "key": "disabledTags",
         "area": "site",
-        "value": "title,alt"
+        "value": "a,form,select"
       },
       {
         "key": "sections",

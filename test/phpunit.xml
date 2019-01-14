@@ -1,0 +1,15 @@
+<phpunit colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         verbose="true"
+         bootstrap="CrosslinksTestHarness.php"
+>
+    <testsuites>
+        <testsuite name="Core">
+            <directory>Tests/Core/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

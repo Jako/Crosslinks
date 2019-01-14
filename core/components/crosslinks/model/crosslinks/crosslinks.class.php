@@ -2,7 +2,7 @@
 /**
  * Crosslinks Classfile
  *
- * Copyright 2018 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2018-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package crosslinks
  * @subpackage classfile
@@ -29,7 +29,7 @@ class Crosslinks
      * The version
      * @var string $version
      */
-    public $version = '1.1.0';
+    public $version = '1.2.0';
 
     /**
      * The class options
@@ -77,7 +77,14 @@ class Crosslinks
         // Add default options
         $this->options = array_merge($this->options, array(
             'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('Agenda Administrator') : false,
-            'debug' => (bool)$this->getOption('debug', $options, false)
+            'debug' => (bool)$this->getOption('debug', $options, false),
+            'tpl' => $this->getOption('tpl', $options, 'Crosslinks.linkTp'),
+            'fullwords' => (bool)$this->getOption('fullwords', $options, true),
+            'sectionsStart' => $this->getOption('sectionsStart', $options, '<!-- CrosslinksStart -->'),
+            'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),
+            'disabledAttributes' => $this->getOption('disabledAttributes', $options, 'title,alt,value'),
+            'disabledTags' => $this->getOption('disabledTags', $options, 'a,form,select'),
+            'sections' => (bool)$this->getOption('sections', $options, false)
         ));
 
         $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
@@ -114,15 +121,21 @@ class Crosslinks
      *
      * @return array
      */
-    public function getLinks()
+    public function getLinks($chunkName)
     {
         /** @var CrosslinksLink[] $links */
         $links = $this->modx->getCollection('CrosslinksLink');
-        $retArray = array();
+        $result = array();
         foreach ($links as $link) {
-            $retArray[] = $link->toArray();
+            $linkArray = $link->toArray();
+            $result[$linkArray['text']] = $this->modx->getChunk($chunkName, array(
+                'text' => $linkArray['text'],
+                'link' => $this->modx->makeUrl($linkArray['resource'], '', json_decode($linkArray['parameter'])),
+                'resource' => $linkArray['resource'],
+                'parameter' => $linkArray['parameter']
+            ));
         };
-        return $retArray;
+        return $result;
     }
 
     /**
@@ -130,36 +143,43 @@ class Crosslinks
      *
      * @param string $text
      * @param string $chunkName
+     * @param array $links
      * @return string
      */
-    public function addCrosslinks($text, $chunkName)
+    public function addCrosslinks($text, $links)
     {
         // Enable section markers
         $enableSections = $this->getOption('sections', null, false);
         if ($enableSections) {
-            $splitEx = '#((?:' . $this->getOption('sectionsStart') . ').*?(?:' . $this->getOption('sectionsEnd') . '))#isu';
+            $splitEx = '~((?:' . $this->getOption('sectionsStart') . ').*?(?:' . $this->getOption('sectionsEnd') . '))~isu';
             $sections = preg_split($splitEx, $text, null, PREG_SPLIT_DELIM_CAPTURE);
         } else {
             $sections = array($text);
         }
 
         // Mask all links first
-        $links = $this->getLinks();
         $maskStart = '<_^_>';
         $maskEnd = '<_$_>';
         $fullwords = $this->getOption('fullwords', null, true);
-        $disabledAttributes = array_map('trim', explode(',', $this->getOption('disabledAttributes', null, 'title,alt')));
-        $splitEx = '#((?:' . implode('|', $disabledAttributes) . ')\s*=\s*".*?")#isu';
-        foreach ($links as $link) {
+        $disabledTags = array_map('trim', explode(',', $this->getOption('disabledTags')));
+        $splitExTags = array();
+        foreach ($disabledTags as $disabledTag) {
+            $splitExTags[] = '<' . $disabledTag . '.*?</' . $disabledTag . '>';
+        }
+        $splitExDisabled = '~([a-z0-9-]+\s*=\s*".*?"|' . implode('|', $splitExTags) . ')~isu';
+
+        //'~((?:title|alt)\s*=\s*".*?"|<(a|form|select).*?</\2>)~isu'
+
+        foreach ($links as $linkText => $linkValue) {
             if ($fullwords) {
                 foreach ($sections as &$section) {
-                    if (($enableSections && strpos($section, $this->getOption('sectionsStart')) === 0 && preg_match('/\b' . preg_quote($link['text']) . '\b/u', $section)) ||
-                        (!$enableSections && preg_match('/\b' . preg_quote($link['text']) . '\b/u', $section))
+                    if (($enableSections && strpos($section, $this->getOption('sectionsStart')) === 0 && preg_match('/\b' . preg_quote($linkText) . '\b/u', $section)) ||
+                        (!$enableSections && preg_match('/\b' . preg_quote($linkText) . '\b/u', $section))
                     ) {
-                        $subSections = preg_split($splitEx, $section, null, PREG_SPLIT_DELIM_CAPTURE);
+                        $subSections = preg_split($splitExDisabled, $section, null, PREG_SPLIT_DELIM_CAPTURE);
                         foreach ($subSections as &$subSection) {
-                            if (!preg_match($splitEx, $subSection)) {
-                                $subSection = preg_replace('/\b' . preg_quote($link['text']) . '\b/u', $maskStart . $link['text'] . $maskEnd, $subSection);
+                            if (!preg_match($splitExDisabled, $subSection)) {
+                                $subSection = preg_replace('/\b' . preg_quote($linkText) . '\b/u', $maskStart . $linkText . $maskEnd, $subSection);
                             }
                         }
                         $section = implode('', $subSections);
@@ -167,13 +187,13 @@ class Crosslinks
                 }
             } else {
                 foreach ($sections as &$section) {
-                    if (($enableSections && strpos($section, $this->getOption('sectionsStart')) === 0 && strpos($section, $link['text']) !== false) ||
-                        (!$enableSections && strpos($section, $link['text']) !== false)
+                    if (($enableSections && strpos($section, $this->getOption('sectionsStart')) === 0 && strpos($section, $linkText) !== false) ||
+                        (!$enableSections && strpos($section, $linkText) !== false)
                     ) {
-                        $subSections = preg_split($splitEx, $section, null, PREG_SPLIT_DELIM_CAPTURE);
+                        $subSections = preg_split($splitExDisabled, $section, null, PREG_SPLIT_DELIM_CAPTURE);
                         foreach ($subSections as &$subSection) {
-                            if (!preg_match($splitEx, $subSection)) {
-                                $subSection = str_replace($link['text'], $maskStart . $link['text'] . $maskEnd, $subSection);
+                            if (!preg_match($splitExDisabled, $subSection)) {
+                                $subSection = str_replace($linkText, $maskStart . $linkText . $maskEnd, $subSection);
                             }
                         }
                         $section = implode('', $subSections);
@@ -184,14 +204,8 @@ class Crosslinks
         $text = implode('', $sections);
 
         // And replace the links after to avoid nested replacement
-        foreach ($links as $link) {
-            $chunk = $this->modx->getChunk($chunkName, array(
-                'text' => $link['text'],
-                'link' => $this->modx->makeUrl($link['resource'], '', json_decode($link['parameter'])),
-                'resource' => $link['resource'],
-                'parameter' => $link['parameter']
-            ));
-            $text = str_replace($maskStart . $link['text'] . $maskEnd, $chunk, $text);
+        foreach ($links as $linkText => $linkValue) {
+            $text = str_replace($maskStart . $linkText . $maskEnd, $linkValue, $text);
         }
 
         // Remove remaining section markers

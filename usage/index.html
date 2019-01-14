@@ -396,10 +396,10 @@
                   <h1>Usage</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>This MODX Extra adds a custom manager page that allows you to create &amp; maintain
-a list of crosslinks in your site. Entries into the crosslinks take the form of
-<code>text =&gt; resource</code> where <code>text</code> is the linktext and <code>resource</code> is the linked
-resource.</p>
+<p>This MODX Extra adds a custom manager page that allows you to create and
+maintain a list of crosslinks in your site. Entries into the crosslinks take the
+form of <code>text =&gt; resource</code> where <code>text</code> is the searched linktext and <code>resource</code>
+is the linked resource.</p>
 <h2 id="plugin">Plugin<a class="headerlink" href="#plugin" title="Permanent link">&para;</a></h2>
 <p>The crosslink plugin parses page content field on render and replaces all
 occurrences of the linktext with the markup defined in the plugin's tpl chunk.
@@ -421,19 +421,34 @@ The plugin replaces the linktext only in the content field of the resource.</p>
 <td>No</td>
 </tr>
 <tr>
+<td>disabledTags</td>
+<td>(Comma separated list) Crosslinks does not replace text inside of this HTML tags.</td>
+<td>No</td>
+</tr>
+<tr>
 <td>fullwords</td>
 <td>Replace only full words of a crosslinks term in the resource content.</td>
 <td>Yes</td>
 </tr>
 <tr>
+<td>sections</td>
+<td>Replace Crosslinks links only in sections marked with <code>&lt;!— CrosslinksStart --&gt;</code> and <code>&lt;!— CrosslinksEnd --&gt;</code>. The section markers could be changed with the settings <code>crosslinks.sectionsStart</code> and <code>crosslinks.sectionsEnd</code>.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>sectionsEnd</td>
+<td>Marker at the end of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting <code>crosslinks.sections</code>.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>sectionsStart</td>
+<td>Marker at the start of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting <code>crosslinks.sections</code>.</td>
+<td>No</td>
+</tr>
+<tr>
 <td>tpl</td>
 <td>Template Chunk for the highlight replacement.</td>
 <td>Crosslinks.linkTpl</td>
-</tr>
-<tr>
-<td>sections</td>
-<td>Replace crosslinks terms only in sections surrounded by <code>&lt;!— CrosslinksStart --&gt;</code> and <code>&lt;!— CrosslinksEnd --&gt;</code>.</td>
-<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -471,8 +486,9 @@ The plugin replaces the linktext only in the content field of the resource.</p>
 </tbody>
 </table>
 <p>The default chunk for these placeholders is available with the <code>Crosslinks.</code>
-prefix. If you want to change the chunk, you have to duplicate it and change the
-duplicate. The default chunk is reset with each update of the Crosslinks extra.</p>
+prefix. If you want to change the chunk, you have to duplicate it, change the
+duplicate and reference the duplicate in the MODX system settings. The default
+chunk is reset with each update of the Crosslinks extra.</p>
                 
                   
                 
@@ -529,7 +545,7 @@ duplicate. The default chunk is reset with each update of the Crosslinks extra.<
     <div class="md-footer-meta__inner md-grid">
       <div class="md-footer-copyright">
         
-          <div>&copy; 2018 <a href="https://treehillstudio.com">Treehill Studio</a></div>
+          <div>&copy; 2018-2019 <a href="https://treehillstudio.com">Treehill Studio</a></div>
         
         <div>powered by
           <a href="http://www.mkdocs.org" title="MkDocs">

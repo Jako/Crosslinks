@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Crosslinks\n\n\nManage crosslinks inside of your site. This MODX Extra adds a custom manager\npage that allows you to create and maintain a list of crosslinks. Each entry of\nthe crosslinks list take the form of \ntext =\n resource\n where \ntext\n is the\nsearched linktext and \nresource\n is the linked resource. A plugin replaces each\nlinktext on a modx resource with the crosslink.\n\n\nRequirements\n\n\n\n\nMODX Revolution 2.6+\n\n\nPHP v5.4+\n\n\n\n\nFeatures\n\n\n\n\nCustom Manager Page for maintaining the crosslinks\n\n\nPlugin for replacing the linktexts with the crosslinks in a MODX resource", 
+            "text": "Crosslinks\n\n\nManage crosslinks inside of your site. This MODX Extra adds a custom manager\npage that allows you to create and maintain a list of crosslinks. Each entry of\nthe crosslinks list take the form of \ntext =\n resource\n where \ntext\n is the\nsearched linktext and \nresource\n is the linked resource. A plugin replaces each\nlinktext on a modx resource with the crosslink.\n\n\nRequirements\n\n\n\n\nMODX Revolution 2.6+\n\n\nPHP v5.4+\n\n\n\n\nFeatures\n\n\n\n\nCustom Manager Page for managing the crosslinks\n\n\nPlugin for replacing the linktexts with the crosslinks in a MODX resource", 
             "title": "Description"
         }, 
         {
@@ -17,7 +17,7 @@
         }, 
         {
             "location": "/#features", 
-            "text": "Custom Manager Page for maintaining the crosslinks  Plugin for replacing the linktexts with the crosslinks in a MODX resource", 
+            "text": "Custom Manager Page for managing the crosslinks  Plugin for replacing the linktexts with the crosslinks in a MODX resource", 
             "title": "Features"
         }, 
         {

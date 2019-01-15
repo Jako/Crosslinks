@@ -1,13 +1,13 @@
 # Crosslinks
 
-Manage and display crosslinks on your site
+Manage crosslinks inside of your site
 
 - Author: Thomas Jakobi <thomas.jakobi@partout.info>
 - License: GNU GPLv2
 
 ## Features
 
-- Custom Manager Page for maintaining the crosslinks
+- Custom Manager Page for managing the crosslinks
 - Plugin for replacing the linktexts with the crosslinks in a MODX resource
 
 ## Installation

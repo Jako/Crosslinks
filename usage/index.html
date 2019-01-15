@@ -397,14 +397,15 @@
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>This MODX Extra adds a custom manager page that allows you to create and
-maintain a list of crosslinks in your site. Entries into the crosslinks take the
-form of <code>text =&gt; resource</code> where <code>text</code> is the searched linktext and <code>resource</code>
-is the linked resource.</p>
+maintain a list of crosslinks. Each entry of the crosslinks list take the form
+of <code>text =&gt; resource</code> where <code>text</code> is the searched linktext and <code>resource</code> is
+the linked resource. A plugin replaces each linktext on a modx resource with a
+crosslink.</p>
 <h2 id="plugin">Plugin<a class="headerlink" href="#plugin" title="Permanent link">&para;</a></h2>
-<p>The crosslink plugin parses page content field on render and replaces all
-occurrences of the linktext with the markup defined in the plugin's tpl chunk.
-This can be used to set a link to the crosslinked resource for a given linktext.
-The plugin replaces the linktext only in the content field of the resource.</p>
+<p>The crosslink plugin parses the content field on render and replaces all
+occurrences of each linktext with the markup defined in the tpl chunk. This can
+be used to set a link to the crosslinked resource for a given linktext. The
+plugin replaces the linktext only in the content field of the resource.</p>
 <p>The Plugin could be controlled by the following MODX System settings:</p>
 <table>
 <thead>
@@ -423,7 +424,7 @@ The plugin replaces the linktext only in the content field of the resource.</p>
 <tr>
 <td>disabledTags</td>
 <td>(Comma separated list) Crosslinks does not replace text inside of this HTML tags.</td>
-<td>No</td>
+<td>a,form,select</td>
 </tr>
 <tr>
 <td>fullwords</td>
@@ -438,12 +439,12 @@ The plugin replaces the linktext only in the content field of the resource.</p>
 <tr>
 <td>sectionsEnd</td>
 <td>Marker at the end of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting <code>crosslinks.sections</code>.</td>
-<td>No</td>
+<td><code>&lt;!— CrosslinksStart --&gt;</code></td>
 </tr>
 <tr>
 <td>sectionsStart</td>
 <td>Marker at the start of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting <code>crosslinks.sections</code>.</td>
-<td>No</td>
+<td><code>&lt;!— CrosslinksEnd --&gt;</code></td>
 </tr>
 <tr>
 <td>tpl</td>
@@ -453,42 +454,37 @@ The plugin replaces the linktext only in the content field of the resource.</p>
 </tbody>
 </table>
 <h2 id="available-placeholders">Available placeholders<a class="headerlink" href="#available-placeholders" title="Permanent link">&para;</a></h2>
-<p>The following placeholders are available in the chunks used by the plugin:</p>
+<p>The following placeholders are available in the linkTpl chunk used by the plugin:</p>
 <table>
 <thead>
 <tr>
 <th>Placeholder</th>
 <th>Description</th>
-<th>Chunk</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>text</td>
 <td>The linktext being referenced.</td>
-<td>linkTpl</td>
 </tr>
 <tr>
 <td>link</td>
 <td>The link to the resource</td>
-<td>linkTpl</td>
 </tr>
 <tr>
 <td>resource</td>
 <td>The id of the linked resource</td>
-<td>linkTpl</td>
 </tr>
 <tr>
 <td>parameter</td>
 <td>json encoded array of link parameters</td>
-<td>linkTpl</td>
 </tr>
 </tbody>
 </table>
 <p>The default chunk for these placeholders is available with the <code>Crosslinks.</code>
 prefix. If you want to change the chunk, you have to duplicate it, change the
 duplicate and reference the duplicate in the MODX system settings. The default
-chunk is reset with each update of the Crosslinks extra.</p>
+chunk would be reset with each update of the Crosslinks extra.</p>
                 
                   
                 

@@ -1,16 +1,12 @@
 <?php
 /**
+ * Crosslinks Test Harness
+ *
  * @package crosslinks
  * @subpackage test
  */
 require_once strtr(realpath(dirname(__FILE__)) . '/CrosslinksTestCase.php', '\\', '/');
 
-/**
- * Main Crosslinks test harness.
- *
- * @package crosslinks
- * @subpackage test
- */
 class CrosslinksTestHarness
 {
     /**

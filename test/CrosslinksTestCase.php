@@ -1,15 +1,11 @@
 <?php
 /**
- * @package crosslinks
- * @subpackage test
- */
-
-/**
- * Extends the basic PHPUnit TestCase class to provide Crosslinks specific methods
+ * Crosslinks Test Case
  *
  * @package crosslinks
  * @subpackage test
  */
+
 class CrosslinksTestCase extends \PHPUnit\Framework\TestCase
 {
     /**

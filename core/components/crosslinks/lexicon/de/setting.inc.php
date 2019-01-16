@@ -1,8 +1,8 @@
 <?php
 $_lang['setting_crosslinks.debug'] = 'Debug';
 $_lang['setting_crosslinks.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
-$_lang['setting_crosslinks.disabledAttributes'] = 'Deaktivierte Attribute';
-$_lang['setting_crosslinks.disabledAttributes_desc'] = '(Kommaseparierte Liste) Crosslinks ersetzt keinen Text innerhalb von diesen HTML Tag Attributen.';
+$_lang['setting_crosslinks.disabledTags'] = 'Deaktivierte Tags';
+$_lang['setting_crosslinks.disabledTags_desc'] = '(Kommaseparierte Liste) Crosslinks ersetzt keinen Text innerhalb von diesen HTML Tags.';
 $_lang['setting_crosslinks.fullwords'] = 'Nur ganze Worte';
 $_lang['setting_crosslinks.fullwords_desc'] = 'Nur ganze Worte eines Crosslinksbegriffs im Ressourcen-Inhalt ersetzen.';
 $_lang['setting_crosslinks.sections'] = 'Nur in Abschnitten';

@@ -1,8 +1,8 @@
 <?php
 $_lang['setting_crosslinks.debug'] = 'Debug';
 $_lang['setting_crosslinks.debug_desc'] = 'Log debug informations in MODX error log.';
-$_lang['setting_crosslinks.disabledAttributes'] = 'Disabled Attributes';
-$_lang['setting_crosslinks.disabledAttributes_desc'] = '(Comma separated list) Crosslinks does not replace text inside of this HTML tag attributes.';
+$_lang['setting_crosslinks.disabledTags'] = 'Disabled Tags';
+$_lang['setting_crosslinks.disabledTags_desc'] = '(Comma separated list) Crosslinks does not replace text inside of this HTML tags.';
 $_lang['setting_crosslinks.fullwords'] = 'Only Full Words';
 $_lang['setting_crosslinks.fullwords_desc'] = 'Replace only full words of a Crosslinks link in the resource content.';
 $_lang['setting_crosslinks.sections'] = 'Restrict to Sections';

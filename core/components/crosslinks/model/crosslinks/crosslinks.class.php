@@ -82,7 +82,6 @@ class Crosslinks
             'fullwords' => (bool)$this->getOption('fullwords', $options, true),
             'sectionsStart' => $this->getOption('sectionsStart', $options, '<!-- CrosslinksStart -->'),
             'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),
-            'disabledAttributes' => $this->getOption('disabledAttributes', $options, 'title,alt,value'),
             'disabledTags' => $this->getOption('disabledTags', $options, 'a,form,select'),
             'sections' => (bool)$this->getOption('sections', $options, false)
         ));
@@ -127,12 +126,11 @@ class Crosslinks
         $links = $this->modx->getCollection('CrosslinksLink');
         $result = array();
         foreach ($links as $link) {
-            $linkArray = $link->toArray();
-            $result[$linkArray['text']] = $this->modx->getChunk($chunkName, array(
-                'text' => $linkArray['text'],
-                'link' => $this->modx->makeUrl($linkArray['resource'], '', json_decode($linkArray['parameter'])),
-                'resource' => $linkArray['resource'],
-                'parameter' => $linkArray['parameter']
+            $result[$link->get('text')] = $this->modx->getChunk($chunkName, array(
+                'text' => $link->get('text'),
+                'link' => $this->modx->makeUrl($link->get('resource'), '', json_decode($link->get('parameter'))),
+                'resource' => $link->get('resource'),
+                'parameter' => $link->get('parameter')
             ));
         };
         return $result;
@@ -142,7 +140,6 @@ class Crosslinks
      * Create links in the text
      *
      * @param string $text
-     * @param string $chunkName
      * @param array $links
      * @return string
      */
@@ -167,9 +164,6 @@ class Crosslinks
             $splitExTags[] = '<' . $disabledTag . '.*?</' . $disabledTag . '>';
         }
         $splitExDisabled = '~([a-z0-9-]+\s*=\s*".*?"|' . implode('|', $splitExTags) . ')~isu';
-
-        //'~((?:title|alt)\s*=\s*".*?"|<(a|form|select).*?</\2>)~isu'
-
         foreach ($links as $linkText => $linkValue) {
             if ($fullwords) {
                 foreach ($sections as &$section) {

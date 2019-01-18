@@ -126,13 +126,17 @@ class Crosslinks
         $links = $this->modx->getCollection('CrosslinksLink');
         $result = array();
         foreach ($links as $link) {
-            $result[$link->get('text')] = $this->modx->getChunk($chunkName, array(
-                'text' => $link->get('text'),
-                'link' => $this->modx->makeUrl($link->get('resource'), '', json_decode($link->get('parameter'))),
-                'resource' => $link->get('resource'),
-                'parameter' => $link->get('parameter')
-            ));
-        };
+            if ($link->get('resource') !== $this->modx->resource->get('id')) {
+                $result[$link->get('text')] = $this->modx->getChunk($chunkName, array(
+                    'text' => $link->get('text'),
+                    'link' => $this->modx->makeUrl($link->get('resource'), '', json_decode($link->get('parameter'))),
+                    'resource' => $link->get('resource'),
+                    'parameter' => $link->get('parameter')
+                ));
+            } else {
+                    $result[$link->get('text')] = $link->get('text');
+                }
+            };
         return $result;
     }
 

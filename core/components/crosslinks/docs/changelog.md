@@ -4,9 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.1] - TBA
+## [1.2.1] - 2019-01-28
 ### Added
 - Don't display a crosslink to the same page
+- Limit the replacements of a crosslink text in one resource
 
 ## [1.2.0] - 2019-01-15
 ### Added

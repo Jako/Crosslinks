@@ -20,6 +20,7 @@ Setting | Description | Default
 debug | Log debug informations in the MODX error log. | No
 disabledTags | (Comma separated list) Crosslinks does not replace text inside of this HTML tags. | a,form,select
 fullwords | Replace only full words of a crosslinks term in the resource content. | Yes
+limit | Limit the replacements of one crosslink text in one resource to this number (0 = not limited) | 0
 sections | Replace Crosslinks links only in sections marked with `<!— CrosslinksStart -->` and `<!— CrosslinksEnd -->`. The section markers could be changed with the settings `crosslinks.sectionsStart` and `crosslinks.sectionsEnd`. | No
 sectionsEnd | Marker at the end of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`. | `<!— CrosslinksStart -->`
 sectionsStart | Marker at the start of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`. | `<!— CrosslinksEnd -->`

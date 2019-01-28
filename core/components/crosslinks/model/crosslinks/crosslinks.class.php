@@ -29,7 +29,7 @@ class Crosslinks
      * The version
      * @var string $version
      */
-    public $version = '1.2.0';
+    public $version = '1.2.1';
 
     /**
      * The class options
@@ -76,14 +76,15 @@ class Crosslinks
 
         // Add default options
         $this->options = array_merge($this->options, array(
-            'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('Agenda Administrator') : false,
             'debug' => (bool)$this->getOption('debug', $options, false),
-            'tpl' => $this->getOption('tpl', $options, 'Crosslinks.linkTp'),
-            'fullwords' => (bool)$this->getOption('fullwords', $options, true),
-            'sectionsStart' => $this->getOption('sectionsStart', $options, '<!-- CrosslinksStart -->'),
-            'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),
             'disabledTags' => $this->getOption('disabledTags', $options, 'a,form,select'),
-            'sections' => (bool)$this->getOption('sections', $options, false)
+            'limit' => (int)$this->getOption('limit', $options, 0),
+            'fullwords' => (bool)$this->getOption('fullwords', $options, true),
+            'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('Agenda Administrator') : false,
+            'sections' => (bool)$this->getOption('sections', $options, false),
+            'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),
+            'sectionsStart' => $this->getOption('sectionsStart', $options, '<!-- CrosslinksStart -->'),
+            'tpl' => $this->getOption('tpl', $options, 'Crosslinks.linkTp'),
         ));
 
         $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
@@ -134,9 +135,9 @@ class Crosslinks
                     'parameter' => $link->get('parameter')
                 ));
             } else {
-                    $result[$link->get('text')] = $link->get('text');
-                }
-            };
+                $result[$link->get('text')] = $link->get('text');
+            }
+        };
         return $result;
     }
 
@@ -203,7 +204,10 @@ class Crosslinks
 
         // And replace the links after to avoid nested replacement
         foreach ($links as $linkText => $linkValue) {
-            $text = str_replace($maskStart . $linkText . $maskEnd, $linkValue, $text);
+            $text = $this->str_replace_limit($maskStart . $linkText . $maskEnd, $linkValue, $text, $this->getOption('limit'));
+            if ($this->getOption('limit')) {
+                $text = $this->str_replace_limit($maskStart . $linkText . $maskEnd, $linkText, $text);
+            }
         }
 
         // Remove remaining section markers
@@ -212,4 +216,23 @@ class Crosslinks
         ), '', $text) : $text;
         return $text;
     }
+
+    /**
+     * str_replace with a limit
+     *
+     * @param string $search
+     * @param string $replace
+     * @param string $subject
+     * @param int $limit
+     * @return mixed|string|string[]|null
+     */
+    private function str_replace_limit($search, $replace, $subject, $limit = 0)
+    {
+        if ($limit == 0) {
+            return str_replace($search, $replace, $subject);
+        }
+        $search = '/' . preg_quote($search, '/') . '/';
+        return preg_replace($search, $replace, $subject, $limit);
+    }
+
 }

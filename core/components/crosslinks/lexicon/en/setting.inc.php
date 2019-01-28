@@ -5,6 +5,8 @@ $_lang['setting_crosslinks.disabledTags'] = 'Disabled Tags';
 $_lang['setting_crosslinks.disabledTags_desc'] = '(Comma separated list) Crosslinks does not replace text inside of this HTML tags.';
 $_lang['setting_crosslinks.fullwords'] = 'Only Full Words';
 $_lang['setting_crosslinks.fullwords_desc'] = 'Replace only full words of a Crosslinks link in the resource content.';
+$_lang['setting_crosslinks.limit'] = 'Limit Replacements';
+$_lang['setting_crosslinks.limit_desc'] = 'Limit the maximum replacements of one crosslink text in one resource to this number (0 = No Limit).';
 $_lang['setting_crosslinks.sections'] = 'Restrict to Sections';
 $_lang['setting_crosslinks.sections_desc'] = 'Replace Crosslinks links only in sections marked with \'&lt;!— CrosslinksStart --&gt;\' and \'&lt;!— CrosslinksEnd --&gt;\'. The section markers could be changed with the settings \'crosslinks.sectionsStart\' and \'crosslinks.sectionsEnd\'.';
 $_lang['setting_crosslinks.sectionsEnd'] = 'Section End Marker';

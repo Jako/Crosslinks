@@ -16,6 +16,7 @@ class CrosslinksCoreTest extends CrosslinksTestCase
         );
         $this->crosslinks->options['sections'] = true;
         $this->crosslinks->options['fullwords'] = false;
+        $this->crosslinks->options['limit'] = 0;
         $source = $this->crosslinks->addCrosslinks($source, $links);
         $result = file_get_contents($this->modx->config['testPath'] . 'Data/Page/result.page.tpl');
 
@@ -30,6 +31,7 @@ class CrosslinksCoreTest extends CrosslinksTestCase
         );
         $this->crosslinks->options['sections'] = true;
         $this->crosslinks->options['fullwords'] = true;
+        $this->crosslinks->options['limit'] = 0;
         $source = $this->crosslinks->addCrosslinks($source, $links);
         $result = file_get_contents($this->modx->config['testPath'] . 'Data/Page/result_fullwords.page.tpl');
 

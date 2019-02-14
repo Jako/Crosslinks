@@ -172,13 +172,13 @@ class Crosslinks
         foreach ($links as $linkText => $linkValue) {
             if ($fullwords) {
                 foreach ($sections as &$section) {
-                    if (($enableSections && strpos($section, $this->getOption('sectionsStart')) === 0 && preg_match('/\b' . preg_quote($linkText) . '\b/u', $section)) ||
-                        (!$enableSections && preg_match('/\b' . preg_quote($linkText) . '\b/u', $section))
+                    if (($enableSections && strpos($section, $this->getOption('sectionsStart')) === 0 && preg_match('/\b' . preg_quote($linkText, '/') . '\b/u', $section)) ||
+                        (!$enableSections && preg_match('/\b' . preg_quote($linkText, '/') . '\b/u', $section))
                     ) {
                         $subSections = preg_split($splitExDisabled, $section, null, PREG_SPLIT_DELIM_CAPTURE);
                         foreach ($subSections as &$subSection) {
                             if (!preg_match($splitExDisabled, $subSection)) {
-                                $subSection = preg_replace('/\b' . preg_quote($linkText) . '\b/u', $maskStart . $linkText . $maskEnd, $subSection);
+                                $subSection = preg_replace('/\b' . preg_quote($linkText, '/') . '\b/u', $maskStart . $linkText . $maskEnd, $subSection);
                             }
                         }
                         $section = implode('', $subSections);

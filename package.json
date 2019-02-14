@@ -4,7 +4,7 @@
   "author": "Thomas Jakobi <thomas.jakobi@partout.info>",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^9.4.5",
+    "autoprefixer": "^9.4.7",
     "grunt": "^1.0.3",
     "grunt-banner": "^0.6.0",
     "grunt-contrib-cssmin": "^3.0.0",

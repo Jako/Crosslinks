@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Crosslinks
+ *
+ * @package crosslinks
+ * @subpackage lexicon
+ */
 $_lang['crosslinks'] = 'Crosslinks';
 
 $_lang['crosslinks.management'] = 'Crosslinks-Manager';

@@ -78,9 +78,9 @@ class Crosslinks
         $this->options = array_merge($this->options, array(
             'debug' => (bool)$this->getOption('debug', $options, false),
             'disabledTags' => $this->getOption('disabledTags', $options, 'a,form,select'),
-            'limit' => (int)$this->getOption('limit', $options, 0),
             'fullwords' => (bool)$this->getOption('fullwords', $options, true),
-            'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('Agenda Administrator') : false,
+            'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('Crosslinks Administrator') : false,
+            'limit' => (int)$this->getOption('limit', $options, 0),
             'sections' => (bool)$this->getOption('sections', $options, false),
             'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),
             'sectionsStart' => $this->getOption('sectionsStart', $options, '<!-- CrosslinksStart -->'),

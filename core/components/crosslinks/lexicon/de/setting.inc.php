@@ -1,4 +1,10 @@
 <?php
+/**
+ * Setting Lexicon Entries for Crosslinks
+ *
+ * @package crosslinks
+ * @subpackage lexicon
+ */
 $_lang['setting_crosslinks.debug'] = 'Debug';
 $_lang['setting_crosslinks.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
 $_lang['setting_crosslinks.disabledTags'] = 'Deaktivierte Tags';

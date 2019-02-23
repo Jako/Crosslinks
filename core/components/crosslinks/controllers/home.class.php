@@ -55,7 +55,7 @@ class CrosslinksHomeManagerController extends modExtraManagerController
 
     public function getLanguageTopics()
     {
-        return array('core:setting','crosslinks:default');
+        return array('core:setting', 'crosslinks:default');
     }
 
     public function process(array $scriptProperties = array())

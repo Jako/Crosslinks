@@ -168,6 +168,7 @@ class Crosslinks
         foreach ($disabledTags as $disabledTag) {
             $splitExTags[] = '<' . $disabledTag . '.*?</' . $disabledTag . '>';
         }
+        // No replacements in html tag attributes and disabled tags
         $splitExDisabled = '~([a-z0-9-]+\s*=\s*".*?"|' . implode('|', $splitExTags) . ')~isu';
         foreach ($links as $linkText => $linkValue) {
             if ($fullwords) {
@@ -202,7 +203,7 @@ class Crosslinks
         }
         $text = implode('', $sections);
 
-        // And replace the links after to avoid nested replacement
+        // Replace the links after to avoid nested replacement
         foreach ($links as $linkText => $linkValue) {
             $text = $this->str_replace_limit($maskStart . $linkText . $maskEnd, $linkValue, $text, $this->getOption('limit'));
             if ($this->getOption('limit')) {
@@ -211,9 +212,9 @@ class Crosslinks
         }
 
         // Remove remaining section markers
-        $text = ($enableSections) ? str_replace(array(
+        $text = str_replace(array(
             $this->getOption('sectionsStart'), $this->getOption('sectionsEnd')
-        ), '', $text) : $text;
+        ), '', $text);
         return $text;
     }
 
@@ -234,5 +235,4 @@ class Crosslinks
         $search = '/' . preg_quote($search, '/') . '/';
         return preg_replace($search, $replace, $subject, $limit);
     }
-
 }

@@ -47,9 +47,9 @@ Crosslinks.panel.HomeTab = function (config) {
     config = config || {};
     Ext.applyIf(config, {
         id: 'crosslinks-panel-' + config.tabtype,
-        title: _('crosslinks.' + config.tabtype),
+        title: config.title,
         items: [{
-            html: '<p>' + _('crosslinks.' + config.tabtype + '_desc') + '</p>',
+            html: '<p>' + config.description + '</p>',
             border: false,
             cls: 'panel-desc'
         }, {
@@ -76,11 +76,15 @@ Crosslinks.panel.Overview = function (config) {
     this.ident = 'crosslinks-panel-overview' + Ext.id();
     this.panelOverviewTabs = [{
         xtype: 'crosslinks-panel-hometab',
+        title: _('crosslinks.links'),
+        description: _('crosslinks.links_desc'),
         tabtype: 'links'
     }];
     if (Crosslinks.config.is_admin) {
         this.panelOverviewTabs.push({
             xtype: 'crosslinks-panel-settings',
+            title: _('crosslinks.settings'),
+            description: _('crosslinks.settings_desc'),
             tabtype: 'settings'
         })
     }

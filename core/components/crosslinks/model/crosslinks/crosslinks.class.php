@@ -43,7 +43,7 @@ class Crosslinks
      * @param modX $modx A reference to the modX instance.
      * @param array $options An array of options. Optional.
      */
-    function __construct(modX &$modx, $options = array())
+    public function __construct(modX &$modx, $options = array())
     {
         $this->modx =& $modx;
         $this->namespace = $this->getOption('namespace', $options, $this->namespace);
@@ -79,7 +79,7 @@ class Crosslinks
             'debug' => (bool)$this->getOption('debug', $options, false),
             'disabledTags' => $this->getOption('disabledTags', $options, 'a,form,select'),
             'fullwords' => (bool)$this->getOption('fullwords', $options, true),
-            'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('Crosslinks Administrator') : false,
+            'is_admin' => ($this->modx->user) ? $modx->hasPermission('settings') || $modx->hasPermission('crosslinks_settings') : false,
             'limit' => (int)$this->getOption('limit', $options, 0),
             'sections' => (bool)$this->getOption('sections', $options, false),
             'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),

@@ -38,6 +38,6 @@ $_lang['crosslinks.settings_desc'] = 'Bearbeiten Sie die Einstellungen von Cross
 $_lang['crosslinks.debug_mode'] = 'Debug Modus';
 
 $_lang['crosslinks.systemsetting_key_err_nv'] = 'Sie dürfen nur Einstellungen mit dem Prefix crosslinks bearbeiten.';
-$_lang['crosslinks.systemsetting_usergroup_err_nv'] = 'Nur Mitglieder der Benutzergruppe Administrator oder Crosslinks Administrator dürfen die Einstellungen ändern.';
+$_lang['crosslinks.systemsetting_usergroup_err_nv'] = 'Nur Benutzer mit einer settings Berechtigung oder einer settings_crosslinks Berechtigung können die Einstellungen ändern.';
 
 $_lang['crosslinks.duplicate'] = 'Duplikat von';

@@ -29,7 +29,7 @@ class Crosslinks
      * The version
      * @var string $version
      */
-    public $version = '1.2.1';
+    public $version = '1.2.2';
 
     /**
      * The class options
@@ -85,6 +85,8 @@ class Crosslinks
             'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),
             'sectionsStart' => $this->getOption('sectionsStart', $options, '<!-- CrosslinksStart -->'),
             'tpl' => $this->getOption('tpl', $options, 'Crosslinks.linkTp'),
+            'enabledContexts' => $this->getOption('enabledContexts', $options, ''),
+            'enabledTemplates' => $this->getOption('enabledTemplates', $options, ''),
         ));
 
         $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));

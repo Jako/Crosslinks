@@ -19,6 +19,8 @@ Setting | Description | Default
 ------------|---------|--------
 debug | Log debug informations in the MODX error log. | No
 disabledTags | (Comma separated list) Crosslinks does not replace text inside of this HTML tags. | a,form,select
+enabledContexts | (Comma separated list) If set, Crosslinks works only in context with this keys. | 
+enabledTemplates | (Comma separated list) If set, Crosslinks works only in templates with this IDs. | 
 fullwords | Replace only full words of a crosslinks term in the resource content. | Yes
 limit | Limit the replacements of one crosslink text in one resource to this number (0 = not limited) | 0
 sections | Replace Crosslinks links only in sections marked with `<!— CrosslinksStart -->` and `<!— CrosslinksEnd -->`. The section markers could be changed with the settings `crosslinks.sectionsStart` and `crosslinks.sectionsEnd`. | No

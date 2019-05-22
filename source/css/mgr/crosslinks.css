@@ -73,6 +73,12 @@
   margin-right: 0;
 }
 
+.x-form-display-field {
+  height: 20px;
+  line-height: 20px;
+  padding: 6px;
+}
+
 .treehillstudio_about {
   cursor: pointer;
   height: 40px;
@@ -106,9 +112,10 @@
 .ribbon {
   height: 180px;
   overflow: hidden;
+  pointer-events: none;
   position: absolute;
   width: 180px;
-  z-index: 9;
+  z-index: 10;
 }
 
 .ribbon:before, .ribbon:after {

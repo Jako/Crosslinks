@@ -18,7 +18,7 @@ class CrosslinksOnLoadWebDocument extends CrosslinksPlugin
         $templates = $this->crosslinks->getOption('enabledTemplates');
         if ($templates) {
             $templates = explode(',', $templates);
-            if (!in_array($this->modx->context->key, $templates)) {
+            if (!in_array($this->modx->resource->get('template'), $templates)) {
                 return;
             }
         }

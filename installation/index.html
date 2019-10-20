@@ -402,24 +402,19 @@ it in there.</p>
 <p>If you can't access the MODX Extras Repository in your MODX installation, you
 can manually install Crosslinks.</p>
 <ul>
-<li>Download the transport package from <a href="https://modx.com/extras/package/crosslinksofterms">MODX Extras</a>
-  (or one of the pre built transport packages in 
-  <a href="https://github.com/Jako/Crosslinks/tree/master/_packages">_packages</a>)  </li>
-<li>Upload the zip file to your MODX installation's <code>core/packages</code> folder or 
-  upload it on the Package Manager page.</li>
-<li>In the MODX Manager, navigate to the Package Manager page, and select 'Search 
-  locally for packages' from the dropdown button.</li>
-<li>Crosslinks should now show up in the list of available packages. Click the 
-  corresponding 'Install' button and follow instructions to complete the installation.</li>
+<li>Download the transport package from <a href="https://modx.com/extras/package/crosslinksofterms">MODX Extras</a> (or one of the pre built transport packages in <a href="https://github.com/Jako/Crosslinks/tree/master/_packages">_packages</a>)</li>
+<li>Upload the zip file to your MODX installation's <code>core/packages</code> folder or upload it manually in the MODX Package Manager.</li>
+<li>In the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown button.</li>
+<li>Crosslinks should now show up in the list of available packages. Click the corresponding 'Install' button and follow instructions to complete the installation.</li>
 </ul>
 <h2 id="build-it-from-source">Build it from source<a class="headerlink" href="#build-it-from-source" title="Permanent link">&para;</a></h2>
 <p>To build and install the package from source you could use <a href="https://github.com/TheBoxer/Git-Package-Management">Git Package
 Management</a>. The GitHub
 repository of Crosslinks contains a
 <a href="https://github.com/Jako/Crosslinks/blob/master/_build/config.json">config.json</a>
-to build that package locally.</p>
-<p>Use this option, if you want to debug Crosslinks and/or contribute bugfixes and
-enhancements. If you want to run the unit tests, you have to rename the file
+to build that package locally. Use this option, if you want to debug Crosslinks 
+and/or contribute bugfixes and enhancements. </p>
+<p>If you want to run the unit tests, you have to rename the file
 <code>test/properties.sample.inc.php</code> to <code>test/properties.inc.php</code> and change the
 values in that file (if needed).</p>
                 

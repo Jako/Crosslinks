@@ -77,9 +77,9 @@ class Crosslinks
         // Add default options
         $this->options = array_merge($this->options, array(
             'debug' => (bool)$this->getOption('debug', $options, false),
+            'is_admin' => ($this->modx->user) ? $modx->hasPermission('settings') || $modx->hasPermission('crosslinks_settings') : false,
             'disabledTags' => $this->getOption('disabledTags', $options, 'a,form,select'),
             'fullwords' => (bool)$this->getOption('fullwords', $options, true),
-            'is_admin' => ($this->modx->user) ? $modx->hasPermission('settings') || $modx->hasPermission('crosslinks_settings') : false,
             'limit' => (int)$this->getOption('limit', $options, 0),
             'sections' => (bool)$this->getOption('sections', $options, false),
             'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),

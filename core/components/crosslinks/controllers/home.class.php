@@ -17,7 +17,7 @@ class CrosslinksHomeManagerController extends modExtraManagerController
     public function initialize()
     {
         $corePath = $this->modx->getOption('crosslinks.core_path', null, $this->modx->getOption('core_path') . 'components/crosslinks/');
-        $this->crosslinks = $this->modx->getService('crosslinks', 'Crosslinks', $corePath . '/model/crosslinks/', array(
+        $this->crosslinks = $this->modx->getService('crosslinks', 'Crosslinks', $corePath . 'model/crosslinks/', array(
             'core_path' => $corePath
         ));
     }

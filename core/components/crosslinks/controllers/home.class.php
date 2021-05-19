@@ -47,7 +47,7 @@ class CrosslinksHomeManagerController extends modExtraManagerController
         }
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
-            Crosslinks.config = ' . json_encode($this->crosslinks->options, JSON_PRETTY_PRINT) . ';
+            Crosslinks.config = ' . json_encode($this->crosslinks->options, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';
             MODx.load({xtype: "crosslinks-page-home"});
         });
         </script>');

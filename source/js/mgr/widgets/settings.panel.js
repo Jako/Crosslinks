@@ -1,5 +1,6 @@
 Crosslinks.panel.Settings = function (config) {
     config = config || {};
+    MODx.request.ns = 'crosslinks';
     Ext.applyIf(config, {
         id: 'crosslinks-panel-settings',
         title: _('crosslinks.settings'),

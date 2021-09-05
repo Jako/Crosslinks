@@ -41,7 +41,7 @@ class CrosslinksResourceGetListProcessor extends modResourceGetListProcessor
 
     public function beforeIteration(array $list)
     {
-        if (!$this->getProperty('id') && $this->getProperty('combo', false)) {
+        if (!$this->getProperty('id') && $this->getProperty('combo', false) === 'true') {
             $empty = array(
                 'id' => '',
                 'pagetitle' => '',
@@ -55,7 +55,7 @@ class CrosslinksResourceGetListProcessor extends modResourceGetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $ta = parent::prepareRow($object);
-        if ($this->getProperty('combo', false)) {
+        if ($this->getProperty('combo', false) === 'true') {
             $ta['pagetitle'] = $ta['pagetitle'] . ' (' . $ta['id'] . ')';
         }
 

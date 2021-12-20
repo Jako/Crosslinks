@@ -13,7 +13,7 @@ occurrences of each linktext with the markup defined in the tpl chunk. This can
 be used to set a link to the crosslinked resource for a given linktext. The
 plugin replaces the linktext only in the content field of the resource.
 
-The Plugin could be controlled by the following MODX System settings:
+Crosslinks uses the following system settings in the namespace `crosslinks`:
 
 Setting | Description | Default
 ------------|---------|--------

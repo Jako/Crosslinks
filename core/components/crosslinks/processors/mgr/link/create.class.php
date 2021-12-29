@@ -26,7 +26,7 @@ class CrosslinksLinkCreateProcessor extends modObjectCreateProcessor
         $resource = $this->getProperty('resource');
         if (empty($resource)) {
             $this->addFieldError('resource', $this->modx->lexicon('crosslinks.link_err_ns_resource'));
-        };
+        }
 
         $this->object->set('createdon', time());
         $this->object->set('createdby', $this->modx->user->get('id'));

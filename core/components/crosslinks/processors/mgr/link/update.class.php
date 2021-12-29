@@ -24,7 +24,7 @@ class CrosslinksLinkUpdateProcessor extends modObjectUpdateProcessor
         $resource = $this->getProperty('resource');
         if (empty($resource)) {
             $this->addFieldError('resource', $this->modx->lexicon('crosslinks.link_err_ns_resource'));
-        };
+        }
 
         $this->object->set('editedon', time());
         $this->object->set('editedby', $this->modx->user->get('id'));

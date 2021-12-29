@@ -139,7 +139,7 @@ class Crosslinks
             } else {
                 $result[$link->get('text')] = $link->get('text');
             }
-        };
+        }
         return $result;
     }
 

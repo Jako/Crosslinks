@@ -25,7 +25,7 @@ Crosslinks.panel.Home = function (config) {
                 afterrender: function (component) {
                     component.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + Crosslinks.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + Crosslinks.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt="Treehill Studio"><br>' +
-                            '© 2018-2019 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '&copy; 2018-2019 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('crosslinks') + ' ' + Crosslinks.config.version,
                             msg: msg,

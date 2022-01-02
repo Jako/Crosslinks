@@ -2,7 +2,7 @@
 /**
  * Crosslinks Classfile
  *
- * Copyright 2018-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2018-2019 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package crosslinks
  * @subpackage classfile

@@ -2,7 +2,7 @@
 
 Manage crosslinks inside of your site
 
-- Author: Thomas Jakobi <thomas.jakobi@partout.info>
+- Author: Thomas Jakobi <office@treehillstudio.com>
 - License: GNU GPLv2
 
 ## Features

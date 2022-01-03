@@ -3,7 +3,7 @@
  * Get list links
  *
  * @package crosslinks
- * @subpackage processor
+ * @subpackage processors
  */
 
 class CrosslinksLinkGetListProcessor extends modObjectGetListProcessor

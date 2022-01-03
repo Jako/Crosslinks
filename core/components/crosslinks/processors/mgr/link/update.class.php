@@ -3,7 +3,7 @@
  * Update link
  *
  * @package crosslinks
- * @subpackage processor
+ * @subpackage processors
  */
 
 class CrosslinksLinkUpdateProcessor extends modObjectUpdateProcessor

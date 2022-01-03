@@ -3,7 +3,7 @@
  * Remove link
  *
  * @package crosslinks
- * @subpackage processor
+ * @subpackage processors
  */
 
 class CrosslinksLinkRemoveProcessor extends modObjectRemoveProcessor

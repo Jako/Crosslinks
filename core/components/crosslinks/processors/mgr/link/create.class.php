@@ -3,7 +3,7 @@
  * Create link
  *
  * @package crosslinks
- * @subpackage processor
+ * @subpackage processors
  */
 
 class CrosslinksLinkCreateProcessor extends modObjectCreateProcessor

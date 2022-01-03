@@ -3,7 +3,7 @@
  * UpdateFromGrid link
  *
  * @package crosslinks
- * @subpackage processor
+ * @subpackage processors
  */
 
 require_once(dirname(__FILE__) . '/update.class.php');

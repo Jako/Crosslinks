@@ -3,7 +3,7 @@
  * Get list resources
  *
  * @package crosslinks
- * @subpackage processor
+ * @subpackage processors
  */
 
 include_once MODX_CORE_PATH . 'model/modx/processors/resource/getlist.class.php';

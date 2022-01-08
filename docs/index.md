@@ -8,10 +8,10 @@ linktext on a modx resource with the crosslink.
 
 ### Requirements
 
-- MODX Revolution 2.6+
-- PHP v5.6+
+* MODX Revolution 2.6+
+* PHP v5.6+
 
 ### Features
 
-- Custom Manager Page for managing the crosslinks
-- Plugin for replacing the linktexts with the crosslinks in a MODX resource
+* Custom Manager Page for managing the crosslinks
+* Plugin for replacing the linktexts with the crosslinks in a MODX resource

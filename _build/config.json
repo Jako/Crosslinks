@@ -23,8 +23,8 @@
       "plugins": [
         {
           "name": "Crosslinks",
-          "file": "crosslinks.plugin.php",
           "description": "Replace crosslinks in the resource",
+          "file": "crosslinks.plugin.php",
           "events": [
             "OnLoadWebDocument"
           ]

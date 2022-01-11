@@ -10,3 +10,5 @@ Ext.extend(crosslinks, Ext.Component, {
 Ext.reg('crosslinks', crosslinks);
 
 Crosslinks = new crosslinks();
+
+MODx.config.help_url = 'https://jako.github.io/Crosslinks/usage/';

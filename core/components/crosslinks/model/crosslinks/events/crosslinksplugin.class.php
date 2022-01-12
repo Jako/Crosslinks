@@ -16,7 +16,7 @@ abstract class CrosslinksPlugin
     public function __construct($modx, &$scriptProperties)
     {
         $this->scriptProperties =& $scriptProperties;
-        $this->modx = &$modx;
+        $this->modx =& $modx;
         $corePath = $this->modx->getOption('crosslinks.core_path', null, $this->modx->getOption('core_path') . 'components/crosslinks/');
         $this->crosslinks = $this->modx->getService('crosslinks', 'Crosslinks', $corePath . 'model/crosslinks/', array(
             'core_path' => $corePath

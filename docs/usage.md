@@ -17,7 +17,7 @@ Crosslinks uses the following system settings in the namespace `crosslinks`:
 
 Setting | Description | Default
 ------------|---------|--------
-debug | Log debug informations in the MODX error log. | No
+debug | Log debug information in the MODX error log. | No
 disabledTags | (Comma separated list) Crosslinks does not replace text inside of this HTML tags. | a,form,select
 enabledContexts | (Comma separated list) If set, Crosslinks works only in context with this keys. | 
 enabledTemplates | (Comma separated list) If set, Crosslinks works only in templates with this IDs. | 

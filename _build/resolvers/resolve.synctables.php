@@ -5,8 +5,8 @@
  * @package crosslinks
  * @subpackage build
  *
- * @var array $options
  * @var xPDOObject $object
+ * @var array $options
  */
 
 if (!function_exists('updateTableColumns')) {
@@ -109,9 +109,9 @@ if ($object->xpdo) {
             /** @var modX $modx */
             $modx = &$object->xpdo;
 
-            $tables = array(
+            $tables = [
                 "CrosslinksLink"
-            );
+            ];
 
             $modelPath = $modx->getOption('crosslinks.core_path', null, $modx->getOption('core_path') . 'components/crosslinks/') . 'model/';
             $modx->addPackage('crosslinks', $modelPath);

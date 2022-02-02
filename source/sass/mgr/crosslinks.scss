@@ -1,5 +1,6 @@
 $treehillstudio-color: #cbd842;
 $red: #be0000;
+$primary: #00948e;
 
 .x-toolbar {
   div.xtb-text {
@@ -80,7 +81,7 @@ $red: #be0000;
   }
 }
 
-.action-buttons {
+.x-grid-buttons {
   text-align: center;
   li {
     display: inline-block;
@@ -180,3 +181,5 @@ $red: #be0000;
     width: 300px;
   }
 }
+
+@import 'modx3';

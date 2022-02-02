@@ -6,7 +6,12 @@
  * @subpackage processors
  */
 
-include_once MODX_CORE_PATH . 'model/modx/processors/resource/getlist.class.php';
+// Compatibility between 2.x/3.x
+if (file_exists(MODX_PROCESSORS_PATH . 'resource/getlist.class.php')) {
+    require_once MODX_PROCESSORS_PATH . 'resource/getlist.class.php';
+} elseif (!class_exists('modResourceGetListProcessor')) {
+    class_alias(\MODX\Revolution\Processors\Resource\GetList::class, \modResourceGetListProcessor::class);
+}
 
 class CrosslinksResourceGetListProcessor extends modResourceGetListProcessor
 {
@@ -14,16 +19,16 @@ class CrosslinksResourceGetListProcessor extends modResourceGetListProcessor
     {
         $query = $this->getProperty('query');
         if (!empty($query)) {
-            $c->where(array(
+            $c->where([
                 'pagetitle:LIKE' => '%' . $query . '%',
                 'OR:id:=' => $query
-            ));
+            ]);
         }
         $parents = $this->getProperty('parents', '');
         if ($parents) {
-            $c->where(array(
+            $c->where([
                 'parent:IN' => array_map('intval', explode(',', $parents))
-            ));
+            ]);
         }
         return $c;
     }
@@ -32,9 +37,9 @@ class CrosslinksResourceGetListProcessor extends modResourceGetListProcessor
     {
         $id = $this->getProperty('id', '');
         if ($id) {
-            $c->where(array(
+            $c->where([
                 'id:IN' => array_map('intval', explode(',', $id))
-            ));
+            ]);
         }
         return $c;
     }
@@ -42,10 +47,10 @@ class CrosslinksResourceGetListProcessor extends modResourceGetListProcessor
     public function beforeIteration(array $list)
     {
         if (!$this->getProperty('id') && $this->getProperty('combo', false) === 'true') {
-            $empty = array(
+            $empty = [
                 'id' => '',
                 'pagetitle' => '',
-            );
+            ];
             $list[] = $empty;
         }
 

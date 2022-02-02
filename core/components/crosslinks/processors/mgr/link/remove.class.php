@@ -1,15 +1,16 @@
 <?php
 /**
- * Remove link
+ * Remove a Link
  *
  * @package crosslinks
  * @subpackage processors
  */
 
-class CrosslinksLinkRemoveProcessor extends modObjectRemoveProcessor
+use TreehillStudio\Crosslinks\Processors\ObjectRemoveProcessor;
+
+class CrosslinksLinkRemoveProcessor extends ObjectRemoveProcessor
 {
     public $classKey = 'CrosslinksLink';
-    public $languageTopics = array('crosslinks:default');
     public $objectType = 'crosslinks.link';
 }
 

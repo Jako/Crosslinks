@@ -14,14 +14,20 @@ class CrosslinksHomeManagerController extends modExtraManagerController
     /** @var Crosslinks $crosslinks */
     public $crosslinks;
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize()
     {
         $corePath = $this->modx->getOption('crosslinks.core_path', null, $this->modx->getOption('core_path') . 'components/crosslinks/');
-        $this->crosslinks = $this->modx->getService('crosslinks', 'Crosslinks', $corePath . 'model/crosslinks/', array(
+        $this->crosslinks = $this->modx->getService('crosslinks', 'Crosslinks', $corePath . 'model/crosslinks/', [
             'core_path' => $corePath
-        ));
+        ]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function loadCustomCssJs()
     {
         $assetsUrl = $this->crosslinks->getOption('assetsUrl');
@@ -53,20 +59,36 @@ class CrosslinksHomeManagerController extends modExtraManagerController
         </script>');
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string[]
+     */
     public function getLanguageTopics()
     {
-        return array('core:setting', 'crosslinks:default');
+        return ['core:setting', 'crosslinks:default'];
     }
 
-    public function process(array $scriptProperties = array())
+    /**
+     * {@inheritDoc}
+     * @param array $scriptProperties
+     */
+    public function process(array $scriptProperties = [])
     {
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string|null
+     */
     public function getPageTitle()
     {
         return $this->modx->lexicon('crosslinks');
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string
+     */
     public function getTemplateFile()
     {
         return $this->crosslinks->getOption('templatesPath') . 'home.tpl';

@@ -4,9 +4,13 @@
  * @subpackage plugin
  */
 
-class CrosslinksOnLoadWebDocument extends CrosslinksPlugin
+namespace TreehillStudio\Crosslinks\Plugins\Events;
+
+use TreehillStudio\Crosslinks\Plugins\Plugin;
+
+class OnLoadWebDocument extends Plugin
 {
-    public function run()
+    public function process()
     {
         $contexts = $this->crosslinks->getOption('enabledContexts');
         if ($contexts) {

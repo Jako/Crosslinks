@@ -18,16 +18,22 @@ Crosslinks.grid.Links = function (config) {
         baseParams: {
             action: 'mgr/link/getlist'
         },
+        autosave: true,
+        save_action: 'mgr/link/updatefromgrid',
         fields: ['id', 'text', 'resource', 'pagetitle', 'parameter'],
         autoHeight: true,
         paging: true,
-        remoteSort: false,
+        remoteSort: true,
         autoExpandColumn: 'text',
+        showActionsColumn: false,
         columns: [{
             header: _('crosslinks.link_text'),
             dataIndex: 'text',
             sortable: true,
-            width: 80
+            width: 80,
+            editor: {
+                xtype: 'textfield'
+            }
         }, {
             header: _('crosslinks.link_resource'),
             dataIndex: 'resource',
@@ -42,11 +48,10 @@ Crosslinks.grid.Links = function (config) {
             sortable: false,
             width: 30,
             renderer: function (v) {
-                var iconclass = (v !== '[]') ? 'icon-check' : 'icon-times';
-                var color = (v !== '[]') ? 'green' : 'red';
+                var iconclass = (v) ? 'icon-check' : 'icon-times';
+                var color = (v) ? 'green' : 'red';
                 return '<div style="text-align:center"><i class="icon ' + iconclass + ' ' + color + '"></i></div>';
             }
-
         }, {
             renderer: {
                 fn: this.buttonColumnRenderer,
@@ -280,7 +285,19 @@ Crosslinks.window.CreateUpdateLink = function (config) {
             anchor: '100%'
         }, {
             xtype: 'crosslinks-json-grid',
+            style: 'padding-top: 10px',
             fieldLabel: _('crosslinks.link_parameter'),
+            fieldConfig: [{
+                name: 'key',
+                width: 50,
+                allowBlank: false,
+                header: _('crosslinks.jsongrid_key')
+            }, {
+                name: 'value',
+                width: 50,
+                allowBlank: false,
+                header: _('crosslinks.jsongrid_value')
+            }],
             name: 'parameter',
             id: this.ident + '-parameter',
             cls: 'modx-grid modx-grid-small',

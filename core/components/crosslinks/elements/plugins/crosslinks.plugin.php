@@ -9,20 +9,25 @@
  * @var array $scriptProperties
  */
 
-$className = 'Crosslinks' . $modx->event->name;
+$className = 'TreehillStudio\Crosslinks\Plugins\Events\\' . $modx->event->name;
 
 $corePath = $modx->getOption('crosslinks.core_path', null, $modx->getOption('core_path') . 'components/crosslinks/');
 /** @var Crosslinks $crosslinks */
-$crosslinks = $modx->getService('crosslinks', 'Crosslinks', $corePath . 'model/crosslinks/', array(
+$crosslinks = $modx->getService('crosslinks', 'Crosslinks', $corePath . 'model/crosslinks/', [
     'core_path' => $corePath
-));
+]);
 
-$modx->loadClass('CrosslinksPlugin', $crosslinks->getOption('modelPath') . 'crosslinks/events/', true, true);
-$modx->loadClass($className, $crosslinks->getOption('modelPath') . 'crosslinks/events/', true, true);
-if (class_exists($className)) {
-    /** @var CrosslinksPlugin $handler */
-    $handler = new $className($modx, $scriptProperties);
-    $handler->run();
+if ($crosslinks) {
+    if (class_exists($className)) {
+        $handler = new $className($modx, $scriptProperties);
+        if (get_class($handler) == $className) {
+            $handler->run();
+        } else {
+            $modx->log(xPDO::LOG_LEVEL_ERROR, $className. ' could not be initialized!', '', 'Crosslinks Plugin');
+        }
+    } else {
+        $modx->log(xPDO::LOG_LEVEL_ERROR, $className. ' was not found!', '', 'Crosslinks Plugin');
+    }
 }
 
 return;

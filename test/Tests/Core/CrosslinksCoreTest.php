@@ -11,9 +11,9 @@ class CrosslinksCoreTest extends CrosslinksTestCase
     public function testAddCrosslinks()
     {
         $source = file_get_contents($this->modx->config['testPath'] . 'Data/Page/source.page.tpl');
-        $links = array(
+        $links = [
             'Template' => '<a class="crosslink" href="https://linkurl" title="Template">Template</a>'
-        );
+        ];
         $this->crosslinks->options['sections'] = true;
         $this->crosslinks->options['fullwords'] = false;
         $this->crosslinks->options['limit'] = 0;
@@ -26,9 +26,9 @@ class CrosslinksCoreTest extends CrosslinksTestCase
     public function testAddCrosslinksFullwords()
     {
         $source = file_get_contents($this->modx->config['testPath'] . 'Data/Page/source.page.tpl');
-        $links = array(
+        $links = [
             'Template' => '<a class="crosslink" href="https://linkurl" title="Template">Template</a>'
-        );
+        ];
         $this->crosslinks->options['sections'] = true;
         $this->crosslinks->options['fullwords'] = true;
         $this->crosslinks->options['limit'] = 0;

@@ -30,7 +30,7 @@ class CrosslinksTestCase extends \PHPUnit\Framework\TestCase
         $this->crosslinks = new Crosslinks($this->modx);
         $this->crosslinks->options['debug'] = true;
 
-        $this->modx->placeholders = array();
+        $this->modx->placeholders = [];
         $this->modx->crosslinks = &$this->crosslinks;
 
         error_reporting(E_ALL);

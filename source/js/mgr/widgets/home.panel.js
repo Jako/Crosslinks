@@ -1,7 +1,7 @@
 Crosslinks.panel.Home = function (config) {
     config = config || {};
     Ext.applyIf(config, {
-        cls: 'container home-panel' + ((Crosslinks.config.debug) ? ' debug' : ''),
+        cls: 'container home-panel' + ((Crosslinks.config.debug) ? ' debug' : '') + ' modx' + Crosslinks.config.modxversion,
         defaults: {
             collapsible: false,
             autoHeight: true
@@ -25,7 +25,7 @@ Crosslinks.panel.Home = function (config) {
                 afterrender: function () {
                     this.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + Crosslinks.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + Crosslinks.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt="Treehill Studio"><br>' +
-                            '&copy; 2018-2019 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '&copy; 2018-2022 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('crosslinks') + ' ' + Crosslinks.config.version,
                             msg: msg,
@@ -82,16 +82,14 @@ Crosslinks.panel.Overview = function (config) {
     }];
     if (Crosslinks.config.is_admin) {
         this.panelOverviewTabs.push({
-            xtype: 'crosslinks-panel-settings',
-            title: _('crosslinks.settings'),
-            description: _('crosslinks.settings_desc'),
-            tabtype: 'settings'
+            xtype: 'crosslinks-panel-settings'
         })
     }
     Ext.applyIf(config, {
         id: this.ident,
         items: [{
             xtype: 'modx-tabs',
+            border: true,
             stateful: true,
             stateId: 'crosslinks-panel-overview',
             stateEvents: ['tabchange'],
@@ -111,7 +109,7 @@ Crosslinks.panel.Overview = function (config) {
             items: this.panelOverviewTabs,
             listeners: {
                 tabchange: function (o, t) {
-                    if (t.tabtype === 'settings') {
+                    if (t.xtype === 'crosslinks-panel-settings') {
                         Ext.getCmp('crosslinks-grid-system-settings').getStore().reload();
                     } else if (t.xtype === 'crosslinks-panel-hometab') {
                         if (Ext.getCmp('crosslinks-panel-' + t.tabtype + '-grid')) {

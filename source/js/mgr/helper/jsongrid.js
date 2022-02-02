@@ -1,83 +1,75 @@
 Crosslinks.grid.JsonGrid = function (config) {
     config = config || {};
-    this.ident = config.ident || 'crosslinks-mecitem' + Ext.id();
-    this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
-        + '<tpl if="action_buttons !== null">'
-        + '<ul class="action-buttons">'
-        + '<tpl for="action_buttons">'
-        + '<li><i class="icon {className} icon-{icon}" title="{text}"></i></li>'
-        + '</tpl>'
-        + '</ul>'
-        + '</tpl>'
-        + '</tpl>', {
-        compiled: true
-    });
+    this.ident = config.ident || 'jsongrid-mecitem' + Ext.id();
     this.hiddenField = new Ext.form.TextArea({
         name: config.hiddenName || config.name,
         hidden: true
     });
+    this.fieldConfig = config.fieldConfig || [{name: 'key'}, {name: 'value'}];
+    this.fieldConfig.push({name: 'id', hidden: true});
+    this.fieldColumns = [];
+    this.fieldNames = [];
+    Ext.each(this.fieldConfig, function (el) {
+        this.fieldNames.push(el.name);
+        this.fieldColumns.push({
+            header: el.header || _(el.name),
+            dataIndex: el.name,
+            editable: true,
+            menuDisabled: true,
+            hidden: el.hidden || false,
+            editor: {
+                xtype: el.xtype || 'textfield',
+                allowBlank: el.allowBlank || true,
+                enableKeyEvents: true,
+                fieldname: el.name,
+                listeners: {
+                    change: {
+                        fn: this.saveValue,
+                        scope: this
+                    },
+                    keyup: {
+                        fn: function (sb) {
+                            var record = this.getSelectionModel().getSelected();
+                            if (record) {
+                                record.set(sb.fieldname, sb.el.dom.value);
+                                this.saveValue();
+                            }
+                        },
+                        scope: this
+                    }
+                }
+            },
+            renderer: function (value, metadata) {
+                metadata.css += 'x-editable-column ';
+                return value;
+            },
+            width: el.width || 100
+        });
+    }, this);
+    if (Crosslinks.config.modxversion === "2") {
+        this.fieldColumns.push({
+            width: 50,
+            menuDisabled: true,
+            renderer: this.actionsColumnRenderer.bind(this)
+        });
+    }
     Ext.applyIf(config, {
         id: this.ident + '-json-grid',
-        fields: ['id', 'key', 'value', 'rank'],
+        fields: this.fieldNames,
         autoHeight: true,
         store: new Ext.data.JsonStore({
-            fields: ['id', 'key', 'value', 'rank'],
-            data: Ext.util.JSON.decode(config.value)
+            fields: this.fieldNames,
+            data: this.loadValue(config.value)
         }),
         enableDragDrop: true,
         ddGroup: this.ident + '-json-grid-dd',
-        autoExpandColumn: 'value',
         labelStyle: 'position: absolute',
-        style: 'padding-top: 10px',
-        columns: [{
-            header: _('crosslinks.jsongrid_key'),
-            dataIndex: 'key',
-            editable: true,
-            editor: {
-                xtype: 'textfield',
-                allowBlank: false,
-                listeners: {
-                    keydown: {
-                        fn: this.saveValue,
-                        scope: this
-                    }
-                }
-            },
-            width: 80
-        }, {
-            header: _('crosslinks.jsongrid_value'),
-            dataIndex: 'value',
-            editable: true,
-            editor: {
-                xtype: 'textfield',
-                allowBlank: false,
-                listeners: {
-                    keydown: {
-                        fn: this.saveValue,
-                        scope: this
-                    }
-                }
-            },
-            width: 80
-        }, {
-            renderer: {
-                fn: this.buttonColumnRenderer,
-                scope: this
-            },
-            menuDisabled: true,
-            width: 30,
-            align: 'right'
-        }, {
-            dataIndex: 'id',
-            hidden: true
-        }, {
-            dataIndex: 'rank',
-            hidden: true
-        }],
+        columns: this.fieldColumns,
+        disableContextMenuAction: true,
         tbar: ['->', {
             text: '<i class="icon icon-plus"></i> ' + _('add'),
             cls: 'primary-button',
-            handler: this.addEntry,
+            handler: this.addElement,
             scope: this
         }],
         listeners: {
@@ -90,26 +82,33 @@ Crosslinks.grid.JsonGrid = function (config) {
     Crosslinks.grid.JsonGrid.superclass.constructor.call(this, config)
 };
 Ext.extend(Crosslinks.grid.JsonGrid, MODx.grid.LocalGrid, {
-    windows: {},
     getMenu: function () {
         var m = [];
         m.push({
             text: _('remove'),
-            handler: this.removeEntry
+            handler: this.removeElement
         });
         return m;
     },
-    addEntry: function () {
+    getActions: function () {
+        return [{
+            action: 'removeElement',
+            icon: 'trash-o',
+            text: _('remove')
+        }]
+    },
+    addElement: function () {
         var ds = this.getStore();
-        var r = new ds.recordType({
-            key: '',
-            value: ''
+        var row = {};
+        Ext.each(this.fieldNames, function (fieldname) {
+            row[fieldname] = '';
         });
-        this.getStore().insert(0, r);
+        row['id'] = this.getStore().getCount();
+        this.getStore().insert(this.getStore().getCount(), new ds.recordType(row));
         this.getView().refresh();
         this.getSelectionModel().selectRow(0);
     },
-    removeEntry: function () {
+    removeElement: function () {
         Ext.Msg.confirm(_('remove') || '', _('confirm_remove') || '', function (e) {
             if (e === 'yes') {
                 var ds = this.getStore();
@@ -119,7 +118,7 @@ Ext.extend(Crosslinks.grid.JsonGrid, MODx.grid.LocalGrid, {
                 }
                 for (var i = 0; i < rows.length; i++) {
                     var id = rows[i].id;
-                    var index = ds.findBy(function (record, id) {
+                    var index = ds.findBy(function (record) {
                         if (record.id === id) {
                             return true;
                         }
@@ -158,72 +157,66 @@ Ext.extend(Crosslinks.grid.JsonGrid, MODx.grid.LocalGrid, {
         this.add(this.hiddenField);
         this.saveValue();
     },
-    buttonColumnRenderer: function () {
-        var values = {
-            action_buttons: [{
-                className: 'remove',
-                icon: 'trash-o',
-                text: _('remove')
-            }]
-        };
-        return this.buttonColumnTpl.apply(values);
-    },
-    onClick: function (e) {
-        var t = e.getTarget();
-        var elm = t.className.split(' ')[0];
-        if (elm === 'icon') {
-            var act = t.className.split(' ')[1];
-            var record = this.getSelectionModel().getSelected();
-            this.menu.record = record.data;
-            switch (act) {
-                case 'remove':
-                    this.removeEntry(record, e);
-                    break;
-                default:
-                    break;
-            }
+    loadValue: function (value) {
+        value = Ext.util.JSON.decode(value);
+        if (value && Array.isArray(value)) {
+            Ext.each(value, function (record, idx) {
+                value[idx]['id'] = idx;
+            });
+        } else {
+            value = [];
         }
+        return value;
     },
     saveValue: function () {
         var value = [];
         Ext.each(this.getStore().getRange(), function (record) {
-            if (record.data.key) {
-                var element = {};
-                element[record.data.key] = record.data.value;
-                value.push(element);
-            }
-        });
+            var row = {};
+            Ext.each(this.fieldNames, function (fieldname) {
+                if (fieldname !== 'id') {
+                    row[fieldname] = record.data[fieldname];
+                }
+            });
+            value.push(row);
+        }, this);
         this.hiddenField.setValue(Ext.util.JSON.encode(value));
-    }
-});
-Ext.reg('crosslinks-json-grid', Crosslinks.grid.JsonGrid);
+    },
+    _getActionsColumnTpl: function () {
+        return new Ext.XTemplate('<tpl for=".">'
+            + '<tpl if="actions !== null">'
+            + '<ul class="x-grid-buttons">'
+            + '<tpl for="actions">'
+            + '<li><i class="x-grid-action icon icon-{icon:htmlEncode}" title="{text:htmlEncode}" data-action="{action:htmlEncode}"></i></li>'
+            + '</tpl>'
+            + '</ul>'
+            + '</tpl>'
+            + '</tpl>', {
+            compiled: true
+        });
+    },
+    actionsColumnRenderer: function (value, metaData, record, rowIndex, colIndex, store) {
+        return this._getActionsColumnTpl().apply({
+            actions: this.getActions()
+        });
+    },
+    onClick: function (e) {
+        var target = e.getTarget();
+        if (!target.classList.contains('x-grid-action')) return;
+        if (!target.dataset.action) return;
 
-Crosslinks.combo.JsonGrid = function (config) {
-    config = config || {};
-    Ext.applyIf(config, {
-        store: new Ext.data.JsonStore({
-            fields: ['name', 'targetwidth', 'targetheight', 'targetRatio'],
-            data: config.data
-        }),
-        mode: 'local',
-        displayField: 'name',
-        valueField: 'name',
-        submitValue: false,
-        triggerAction: 'all',
-        listeners: {
-            select: {
-                fn: this.selectConfig,
-                scope: this
+        var actionHandler = 'action' + target.dataset.action.charAt(0).toUpperCase() + target.dataset.action.slice(1);
+        if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+            actionHandler = target.dataset.action;
+            if (!this[actionHandler] || (typeof this[actionHandler] !== 'function')) {
+                return;
             }
         }
-    });
-    Crosslinks.combo.JsonGrid.superclass.constructor.call(this, config);
-};
-Ext.extend(Crosslinks.combo.JsonGrid, MODx.combo.ComboBox, {
-    selectConfig: function (c, v) {
-        Ext.getCmp('inopt_targetWidth' + this.config.tvId).setValue(v.data.targetwidth);
-        Ext.getCmp('inopt_targetHeight' + this.config.tvId).setValue(v.data.targetheight);
-        Ext.getCmp('inopt_targetRatio' + this.config.tvId).setValue(v.data.targetRatio);
-    }
+
+        var record = this.getSelectionModel().getSelected();
+        var recordIndex = this.store.indexOf(record);
+        this.menu.record = record.data;
+
+        this[actionHandler](record, recordIndex, e);
+    },
 });
-Ext.reg('crosslinks-json-combo', Crosslinks.combo.JsonGrid);
+Ext.reg('crosslinks-json-grid', Crosslinks.grid.JsonGrid);

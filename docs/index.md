@@ -9,7 +9,7 @@ linktext on a modx resource with the crosslink.
 ### Requirements
 
 * MODX Revolution 2.6+
-* PHP v5.6+
+* PHP 7.2+
 
 ### Features
 

@@ -2,7 +2,7 @@
 /**
  * Crosslinks
  *
- * Copyright 2018-2022 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2018-2019 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package crosslinks
  * @subpackage classfile
@@ -10,9 +10,7 @@
 
 namespace TreehillStudio\Crosslinks;
 
-use modResource;
 use modX;
-use Term;
 
 /**
  * Class Crosslinks
@@ -41,7 +39,7 @@ class Crosslinks
      * The version
      * @var string $version
      */
-    public $version = '1.3.0';
+    public $version = '1.2.2';
 
     /**
      * The class options
@@ -145,7 +143,6 @@ class Crosslinks
         $result = [];
         foreach ($links as $link) {
             if ($link->get('resource') !== $this->modx->resource->get('id')) {
-                $test = json_decode($link->get('parameter'), true);
                 $result[$link->get('text')] = $this->modx->getChunk($chunkName, [
                     'text' => $link->get('text'),
                     'link' => $this->modx->makeUrl($link->get('resource'), '', json_decode($link->get('parameter'), true)),
@@ -243,7 +240,7 @@ class Crosslinks
      * @param string $replace
      * @param string $subject
      * @param int $limit
-     * @return mixed|string|string[]|null
+     * @return string|string[]|null
      */
     private function str_replace_limit($search, $replace, $subject, $limit = 0)
     {

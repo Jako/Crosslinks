@@ -1,3 +1,5 @@
+[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/-/modx-crosslinks-standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/modx-crosslinks-standard/)
+
 # Crosslinks
 
 Manage crosslinks inside of your site.
@@ -21,3 +23,12 @@ Install via package manager and create the crosslinks in the custom manager page
 ## Documentation
 
 For more information please read the [documentation](https://jako.github.io/Crosslinks/).
+
+## License
+
+The project is licensed under the [GPLv2 license](https://github.com/Jako/Crosslinks/blob/master/core/components/crosslinks/docs/license.md).
+
+## Translations
+
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-crosslinks-standard/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-crosslinks-system-settings/)
+

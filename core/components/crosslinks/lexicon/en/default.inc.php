@@ -33,7 +33,7 @@ $_lang['crosslinks.link_err_ns_text'] = 'You need to specify a text';
 $_lang['crosslinks.link_err_nv_text'] = 'The link contains invalid characters. You could use letters, numbers, a space and the following characters: :.;,-_';
 
 $_lang['crosslinks.settings'] = '<i class="icon icon-cog"></i>';
-$_lang['crosslinks.settings_desc'] = 'Edit the settings of Crosslinks. You can edit the value of a system setting by double-clicking on the \'Value\' table cell or by right-clicking in the table cell.';
+$_lang['crosslinks.settings_desc'] = 'Edit the settings of Crosslinks. You can edit the value of a system setting by double-clicking on the ‘Value’ table cell or by right-clicking in the table cell.';
 
 $_lang['crosslinks.debug_mode'] = 'Debug Mode';
 

@@ -1,6 +1,6 @@
 Crosslinks.grid.JsonGrid = function (config) {
     config = config || {};
-    this.ident = config.ident || 'jsongrid-mecitem' + Ext.id();
+    this.ident = 'crosslinks-jsongrid-' + Ext.id();
     this.hiddenField = new Ext.form.TextArea({
         name: config.hiddenName || config.name,
         hidden: true

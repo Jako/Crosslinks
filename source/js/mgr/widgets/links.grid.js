@@ -1,5 +1,6 @@
 Crosslinks.grid.Links = function (config) {
     config = config || {};
+    this.ident = 'crosslinks-links-' + Ext.id();
     this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
         + '<tpl if="action_buttons !== null">'
         + '<ul class="action-buttons">'
@@ -11,7 +12,6 @@ Crosslinks.grid.Links = function (config) {
         + '</tpl>', {
         compiled: true
     });
-    this.ident = 'crosslinks-links' + Ext.id();
     Ext.applyIf(config, {
         id: this.ident + '-crosslinks-grid-links',
         url: Crosslinks.config.connectorUrl,
@@ -261,7 +261,7 @@ Ext.reg('crosslinks-grid-links', Crosslinks.grid.Links);
 
 Crosslinks.window.CreateUpdateLink = function (config) {
     config = config || {};
-    this.ident = config.ident || 'culink' + Ext.id();
+    this.ident = 'crosslinks-link-create-update-' + Ext.id();
     Ext.applyIf(config, {
         id: this.ident,
         url: Crosslinks.config.connectorUrl,

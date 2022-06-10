@@ -73,7 +73,7 @@ Ext.reg('crosslinks-panel-hometab', Crosslinks.panel.HomeTab);
 
 Crosslinks.panel.Overview = function (config) {
     config = config || {};
-    this.ident = 'crosslinks-panel-overview' + Ext.id();
+    this.ident = 'crosslinks-panel-overview-' + Ext.id();
     this.panelOverviewTabs = [{
         xtype: 'crosslinks-panel-hometab',
         title: _('crosslinks.links'),

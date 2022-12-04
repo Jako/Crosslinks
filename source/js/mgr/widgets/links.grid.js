@@ -102,7 +102,7 @@ Crosslinks.grid.Links = function (config) {
             }
         }]
     });
-    Crosslinks.grid.Links.superclass.constructor.call(this, config)
+    Crosslinks.grid.Links.superclass.constructor.call(this, config);
 };
 Ext.extend(Crosslinks.grid.Links, MODx.grid.Grid, {
     windows: {},

@@ -79,7 +79,7 @@ Crosslinks.grid.JsonGrid = function (config) {
             }
         }
     });
-    Crosslinks.grid.JsonGrid.superclass.constructor.call(this, config)
+    Crosslinks.grid.JsonGrid.superclass.constructor.call(this, config);
 };
 Ext.extend(Crosslinks.grid.JsonGrid, MODx.grid.LocalGrid, {
     getMenu: function () {

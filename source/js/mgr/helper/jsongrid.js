@@ -54,7 +54,7 @@ Crosslinks.grid.JsonGrid = function (config) {
         });
     }
     Ext.applyIf(config, {
-        id: this.ident + '-json-grid',
+        id: this.ident,
         fields: this.fieldNames,
         autoHeight: true,
         store: new Ext.data.JsonStore({

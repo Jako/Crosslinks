@@ -63,7 +63,8 @@ Crosslinks.grid.Links = function (config) {
         tbar: [{
             text: _('crosslinks.link_create'),
             cls: 'primary-button',
-            handler: this.createLink
+            handler: this.createLink,
+            scope: this
         }, '->', {
             xtype: 'textfield',
             id: this.ident + '-crosslinks-filter-search',
@@ -213,26 +214,23 @@ Ext.extend(Crosslinks.grid.Links, MODx.grid.Grid, {
         this.refresh();
     },
     buttonColumnRenderer: function () {
-        var values = {
-            action_buttons: [
-                {
-                    className: 'update',
-                    icon: 'pencil-square-o',
-                    text: _('crosslinks.link_update')
-                },
-                {
-                    className: 'duplicate',
-                    icon: 'clone',
-                    text: _('crosslinks.link_duplicate')
-                },
-                {
-                    className: 'remove',
-                    icon: 'trash-o',
-                    text: _('crosslinks.link_remove')
-                }
-            ]
-        };
-        return this.buttonColumnTpl.apply(values);
+        var b = [];
+        b.push({
+            className: 'update',
+            icon: 'pencil-square-o',
+            text: _('crosslinks.link_update')
+        }, {
+            className: 'duplicate',
+            icon: 'clone',
+            text: _('crosslinks.link_duplicate')
+        }, {
+            className: 'remove',
+            icon: 'trash-o',
+            text: _('crosslinks.link_remove')
+        });
+        return this.buttonColumnTpl.apply({
+            action_buttons: b
+        });
     },
     onClick: function (e) {
         var t = e.getTarget();

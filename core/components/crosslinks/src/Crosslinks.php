@@ -85,6 +85,13 @@ class Crosslinks
             'connectorUrl' => $assetsUrl . 'connector.php'
         ], $options);
 
+        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
+        $lexicon->load($this->namespace . ':default');
+
+        $this->packageName = $this->modx->lexicon('crosslinks');
+
+        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
+
         // Add default options
         $this->options = array_merge($this->options, [
             'debug' => (bool)$this->getOption('debug', $options, false),
@@ -100,11 +107,6 @@ class Crosslinks
             'enabledContexts' => $this->getOption('enabledContexts', $options, ''),
             'enabledTemplates' => $this->getOption('enabledTemplates', $options, ''),
         ]);
-
-        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
-
-        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
-        $lexicon->load($this->namespace . ':default');
     }
 
     /**

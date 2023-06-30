@@ -18,13 +18,13 @@ Crosslinks.grid.Links = function (config) {
         baseParams: {
             action: 'mgr/link/getlist'
         },
-        autosave: true,
-        save_action: 'mgr/link/updatefromgrid',
         fields: ['id', 'text', 'resource', 'pagetitle', 'parameter'],
         autoHeight: true,
         paging: true,
         remoteSort: true,
         autoExpandColumn: 'text',
+        autosave: true,
+        save_action: 'mgr/link/updatefromgrid',
         showActionsColumn: false,
         columns: [{
             header: _('crosslinks.link_text'),

@@ -98,7 +98,7 @@ class Crosslinks
             'modxversion' => $modxversion['version'],
             'disabledTags' => $this->getOption('disabledTags', $options, 'a,form,select'),
             'fullwords' => (bool)$this->getOption('fullwords', $options, true),
-            'is_admin' => $this->modx->user && ($modx->hasPermission('settings') || $modx->hasPermission($this->namespace . '_settings')),
+            'is_admin' => $this->modx->user && $this->modx->context && ($modx->hasPermission('settings') || $modx->hasPermission($this->namespace . '_settings')),
             'limit' => (int)$this->getOption('limit', $options, 0),
             'sections' => (bool)$this->getOption('sections', $options, false),
             'sectionsEnd' => $this->getOption('sectionsEnd', $options, '<!-- CrosslinksEnd -->'),

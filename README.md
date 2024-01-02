@@ -1,4 +1,4 @@
-[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/-/modx-crosslinks-standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/modx-crosslinks-standard/)
+[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/crosslinks/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/crosslinks/standard/)
 
 # Crosslinks
 
@@ -30,5 +30,5 @@ The project is licensed under the [GPLv2 license](https://github.com/Jako/Crossl
 
 ## Translations
 
-Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-crosslinks-standard/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-crosslinks-system-settings/)
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/crosslinks/standard/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/crosslinks/system-settings/)
 

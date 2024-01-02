@@ -1,4 +1,4 @@
-[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/crosslinks/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/crosslinks/standard/)
+[![Default Lexicon](https://hosted.weblate.org/widget/modx-extras/crosslinks/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/crosslinks/standard/)
 
 # Crosslinks
 

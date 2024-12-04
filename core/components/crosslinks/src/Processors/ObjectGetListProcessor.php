@@ -8,9 +8,9 @@
 
 namespace TreehillStudio\Crosslinks\Processors;
 
-use TreehillStudio\Crosslinks\Crosslinks;
 use modObjectGetListProcessor;
 use modX;
+use TreehillStudio\Crosslinks\Crosslinks;
 use xPDOQuery;
 
 /**
@@ -48,6 +48,18 @@ class ObjectGetListProcessor extends modObjectGetListProcessor
     public function getBooleanProperty($k, $default = null)
     {
         return ($this->getProperty($k, $default) === 'true' || $this->getProperty($k, $default) === true || $this->getProperty($k, $default) === '1' || $this->getProperty($k, $default) === 1);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return string[]
+     */
+    public function getLanguageTopics()
+    {
+        if (file_exists($this->crosslinks->getOption('corePath') . 'lexicon/' . $this->modx->getOption('manager_language', [], 'en') . '/custom.inc.php')) {
+            $this->languageTopics[] = 'crosslinks:custom';
+        }
+        return $this->languageTopics;
     }
 
     /**

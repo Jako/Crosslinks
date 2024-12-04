@@ -8,9 +8,9 @@
 
 namespace TreehillStudio\Crosslinks\Processors;
 
-use TreehillStudio\Crosslinks\Crosslinks;
 use modProcessor;
 use modX;
+use TreehillStudio\Crosslinks\Crosslinks;
 
 /**
  * Class Processor
@@ -19,7 +19,7 @@ abstract class Processor extends modProcessor
 {
     public $languageTopics = ['crosslinks:default'];
 
-    /** @var Crosslinks */
+    /** @var Crosslinks $crosslinks */
     public $crosslinks;
 
     /**
@@ -27,12 +27,21 @@ abstract class Processor extends modProcessor
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    function __construct(modX &$modx, array $properties = [])
+    public function __construct(modX &$modx, array $properties = [])
     {
         parent::__construct($modx, $properties);
 
         $corePath = $this->modx->getOption('crosslinks.core_path', null, $this->modx->getOption('core_path') . 'components/crosslinks/');
         $this->crosslinks = $this->modx->getService('crosslinks', 'Crosslinks', $corePath . 'model/crosslinks/');
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
+    public function checkPermissions()
+    {
+        return !empty($this->permission) ? $this->modx->hasPermission($this->permission) : true;
     }
 
     abstract public function process();

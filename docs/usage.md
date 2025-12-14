@@ -15,29 +15,29 @@ plugin replaces the linktext only in the content field of the resource.
 
 Crosslinks uses the following system settings in the namespace `crosslinks`:
 
-Setting | Description | Default
-------------|---------|--------
-debug | Log debug information in the MODX error log. | No
-disabledTags | (Comma separated list) Crosslinks does not replace text inside of this HTML tags. | a,form,select
-enabledContexts | (Comma separated list) If set, Crosslinks works only in context with this keys. | 
-enabledTemplates | (Comma separated list) If set, Crosslinks works only in templates with this IDs. | 
-fullwords | Replace only full words of a crosslinks term in the resource content. | Yes
-limit | Limit the replacements of one crosslink text in one resource to this number (0 = not limited) | 0
-sections | Replace Crosslinks links only in sections marked with `<!— CrosslinksStart -->` and `<!— CrosslinksEnd -->`. The section markers could be changed with the settings `crosslinks.sectionsStart` and `crosslinks.sectionsEnd`. | No
-sectionsEnd | Marker at the end of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`. | `<!— CrosslinksStart -->`
-sectionsStart | Marker at the start of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`. | `<!— CrosslinksEnd -->`
-tpl | Template Chunk for the highlight replacement. | Crosslinks.linkTpl
+| Key                         | Name                 | Description                                                                                                                                                                                                                              | Default                  |
+|-----------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|
+| crosslinks.debug            | Debug                | Log debug information in the MODX error log.                                                                                                                                                                                             | No                       |
+| crosslinks.disabledTags     | Disabled Tags        | (Comma-separated list) Crosslinks does not replace text inside of this HTML tags.                                                                                                                                                        | a,form,select            |
+| crosslinks.enabledContexts  | Enabled Contexts     | (Comma-separated list) If set, Crosslinks works only in context with this keys.                                                                                                                                                          | -                        |
+| crosslinks.enabledTemplates | Enabled Templates    | (Comma-separated list) If set, Crosslinks works only in templates with this IDs.                                                                                                                                                         | -                        |
+| crosslinks.fullwords        | Only Full Words      | Replace only full words of a Crosslinks link in the resource content.                                                                                                                                                                    | Yes                      |
+| crosslinks.limit            | Limit Replacements   | Limit the maximum replacements of one crosslink text in one resource to this number (0 = No Limit).                                                                                                                                      | -                        |
+| crosslinks.sections         | Restrict to Sections | Replace Crosslinks links only in sections marked with `&lt;!— CrosslinksStart --&gt;` and `&lt;!— CrosslinksEnd --&gt;`. The section markers could be changed with the settings `crosslinks.sectionsStart` and `crosslinks.sectionsEnd`. | No                       |
+| crosslinks.sectionsEnd      | Section End Marker   | Marker at the end of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`.                                                                                        | <!-- CrosslinksEnd -->   |
+| crosslinks.sectionsStart    | Section Start Marker | Marker at the start of a section processed by Crosslinks. The restriction to marked sections can be activated in the setting `crosslinks.sections`.                                                                                      | <!-- CrosslinksStart --> |
+| crosslinks.tpl              | Link Template        | Template Chunk for the link replacement.                                                                                                                                                                                                 | Crosslinks.linkTpl       |
 
 ## Available placeholders
 
 The following placeholders are available in the linkTpl chunk used by the plugin:
 
-Placeholder | Description
-------------|------------
-text | The linktext being referenced.
-link | The link to the resource
-resource | The id of the linked resource
-parameter | json encoded array of link parameters
+| Placeholder | Description                           |
+|-------------|---------------------------------------|
+| text        | The linktext being referenced.        |
+| link        | The link to the resource              |
+| resource    | The id of the linked resource         |
+| parameter   | json encoded array of link parameters |
 
 The default chunk for these placeholders is available with the `Crosslinks.`
 prefix. If you want to change the chunk, you have to duplicate it, change the

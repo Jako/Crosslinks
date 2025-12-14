@@ -8,11 +8,11 @@
 $_lang['setting_crosslinks.debug'] = 'Debug';
 $_lang['setting_crosslinks.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
 $_lang['setting_crosslinks.disabledTags'] = 'Deaktivierte Tags';
-$_lang['setting_crosslinks.disabledTags_desc'] = '(Kommaseparierte Liste) Crosslinks ersetzt keinen Text innerhalb von diesen HTML Tags.';
+$_lang['setting_crosslinks.disabledTags_desc'] = 'Kommagetrennte Liste von HTML-Tags in denen Crosslinks den darin enthaltenen Text nicht ersetzt.';
 $_lang['setting_crosslinks.enabledContexts'] = 'Aktivierte Kontexte';
-$_lang['setting_crosslinks.enabledContexts_desc'] = '(Kommaseparierte Liste) Wenn gesetzt, arbeitet Crosslinks nur in Kontexten mit diesen Schlüsseln.';
+$_lang['setting_crosslinks.enabledContexts_desc'] = 'Kommagetrennte Liste von Kontext-Schlüsseln in den Crosslinks arbeitet.';
 $_lang['setting_crosslinks.enabledTemplates'] = 'Aktivierte Templates';
-$_lang['setting_crosslinks.enabledTemplates_desc'] = '(Kommaseparierte Liste) Wenn gesetzt, arbeitet Crosslinks nur in Templates mit diesen IDs.';
+$_lang['setting_crosslinks.enabledTemplates_desc'] = 'Kommagetrennte Liste von Template-IDs in denen Crosslinks arbeitet.';
 $_lang['setting_crosslinks.fullwords'] = 'Nur ganze Worte';
 $_lang['setting_crosslinks.fullwords_desc'] = 'Nur ganze Worte eines Crosslinksbegriffs im Ressourcen-Inhalt ersetzen.';
 $_lang['setting_crosslinks.limit'] = 'Ersetzungen limitieren';

@@ -1,10 +1,10 @@
 # Crosslinks
 
-Manage crosslinks inside of your site. This MODX Extra adds a custom manager
-page that allows you to create and maintain a list of crosslinks. Each entry of
-the crosslinks list take the form of `text => resource` where `text` is the
-searched linktext and `resource` is the linked resource. A plugin replaces each
-linktext on a modx resource with the crosslink.
+Manage the generation of crosslinks inside of your site. This MODX Extra adds a
+custom manager page that allows you to create and maintain a list of crosslinks.
+Each entry of the crosslinks list take the form of `text => resource` where
+`text` is the searched linktext and `resource` is the linked resource. A plugin
+replaces each linktext on a modx resource with the crosslink.
 
 ### Requirements
 

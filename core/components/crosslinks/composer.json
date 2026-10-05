@@ -1,6 +1,7 @@
 {
   "name": "treehillstudio/crosslinks",
   "description": "Manage automatic crosslinks",
+  "version": "1.3.0",
   "authors": [
     {
       "name": "Thomas Jakobi",

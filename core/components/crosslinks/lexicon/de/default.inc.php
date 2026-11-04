@@ -30,4 +30,4 @@ $_lang['crosslinks.menu_desc'] = 'Crosslinks verwalten';
 $_lang['crosslinks.settings'] = '<i class="icon icon-cog"></i>';
 $_lang['crosslinks.settings_desc'] = 'Bearbeiten Sie die Einstellungen von Crosslinks. Sie können den Wert einer Systemeinstellung mit einem Doppelklick auf die ‚Wert‘-Tabellenzelle oder die Systemeinstellung mit einem Rechtsklick in der Tabellenzelle bearbeiten.';
 $_lang['crosslinks.systemsetting_key_err_nv'] = 'Sie dürfen nur Einstellungen mit dem Prefix crosslinks bearbeiten.';
-$_lang['crosslinks.systemsetting_usergroup_err_nv'] = 'Nur Benutzer mit einer settings Berechtigung oder einer settings_crosslinks Berechtigung können die Einstellungen ändern.';
+$_lang['crosslinks.systemsetting_usergroup_err_nv'] = 'Nur Benutzer mit einer settings Berechtigung oder einer crosslinks_settings Berechtigung können die Einstellungen ändern.';

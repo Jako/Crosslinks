@@ -30,4 +30,4 @@ $_lang['crosslinks.menu_desc'] = 'Manage Crosslinks';
 $_lang['crosslinks.settings'] = '<i class="icon icon-cog"></i>';
 $_lang['crosslinks.settings_desc'] = 'Edit the settings of Crosslinks. You can edit the value of a system setting by double-clicking on the ‘Value’ table cell or by right-clicking in the table cell.';
 $_lang['crosslinks.systemsetting_key_err_nv'] = 'You could only edit settings with the prefix crosslinks.';
-$_lang['crosslinks.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a settings_crosslinks permission are allowed to change settings.';
+$_lang['crosslinks.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a crosslinks_settings permission are allowed to change settings.';
